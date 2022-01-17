@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="submenu" name="Theme Garden Submenu">
+        <t t-set="has_visible_submenu" t-value="(submenu.is_mega_menu and submenu.is_visible) or submenu.child_id.filtered(lambda menu: menu.is_visible)"/>
+        <li t-if="submenu.is_visible and not has_visible_submenu">
+            <a t-att-href="submenu.clean_url()"
+                t-attf-class="header__menu-item header__menu-item list-menu__item link link--text focus-inset"
+                role="menuitem"
+                t-ignore="true"
+                t-att-target="'_blank' if submenu.new_window else None">
+                <span t-attf-class="#{'header__active-menu-item' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else ''}" t-field="submenu.name"/>
+            </a>
+        </li>
+
+        <li t-if="has_visible_submenu" t-attf-class="dropdown #{
+            (submenu.clean_url() and submenu.clean_url() != '/' and any(request.httprequest.path == child.url for child in submenu.child_id if child.url) or
+            (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'
+            } #{submenu.is_mega_menu and 'position-static'}">
+            <a t-attf-class="#{link_class or ''} dropdown-toggle header__menu-item list-menu__item link focus-inset #{submenu.is_mega_menu and 'o_mega_menu_toggle'}" data-toggle="dropdown" href="#">
+                <span t-field="submenu.name"/>
+            </a>
+            <div t-if="submenu.is_mega_menu"
+                    t-attf-class="dropdown-menu o_mega_menu #{submenu.mega_menu_classes} header__menu-item list-menu__item link focus-inset"
+                    data-name="Mega Menu"
+                    t-field="submenu.mega_menu_content"/>
+            <ul t-else="" class="dropdown-menu header__submenu list-menu list-menu--disclosure caption-large motion-reduce" role="menu">
+                <t t-foreach="submenu.child_id" t-as="submenu">
+                    <t t-call="theme_garden.submenu">
+                        <t t-set="item_class" t-value="None"/>
+                        <t t-set="link_class" t-value="'dropdown-item'"/>
+                    </t>
+                </t>
+            </ul>
+        </li>
+    </template>
+</odoo>

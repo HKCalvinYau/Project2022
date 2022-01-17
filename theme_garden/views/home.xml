@@ -1,0 +1,55 @@
+<odoo>
+    <template id="theme_gardena_homepage" inherit_id="website.homepage" name="Gardena Homepage">
+        <xpath expr="//div[@id='wrap']" position="replace">
+          <div id="wrap" class="oe_structure">
+            <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+                  <section id="shopify-section-template--15058976768185__image_banner" class="shopify-section spaced-section spaced-section--full-width"><link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-image-banner.css?v=9491725043636912837" rel="stylesheet" type="text/css" media="all" />
+                    <style data-shopify="">
+                        #Banner-template--15058976768185__image_banner::after {
+                        opacity: 0.0;
+                      }</style>
+                      
+                      <div id="Banner-template--15058976768185__image_banner" class="banner banner--mobile-bottom"><div class="banner__media media">
+                          <img srcset="//cdn.shopify.com/s/files/1/0600/5473/2985/files/Facebook_cover_1_375x.png?v=1641289350 375w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/Facebook_cover_1_750x.png?v=1641289350 750w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/Facebook_cover_1_1100x.png?v=1641289350 1100w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/Facebook_cover_1_1500x.png?v=1641289350 1500w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/Facebook_cover_1_1780x.png?v=1641289350 1780w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/Facebook_cover_1_2000x.png?v=1641289350 2000w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/Facebook_cover_1_3000x.png?v=1641289350 3000w," sizes="100vw" src="//cdn.shopify.com/s/files/1/0600/5473/2985/files/Facebook_cover_1_1500x.png?v=1641289350" loading="lazy" alt="" width="3280" height="1848.0" />
+                          </div><div class="banner__content banner__content--center page-width">
+                          <div class="banner__box color-background-1"><h2 class="banner__heading h1">
+                                    <span>HAPPY HOLIDAYS</span>
+                                  </h2><div class="banner__buttons"><a href="/shop" class="button button--primary">SHOP NOW</a></div></div>
+                        </div>
+                      </div>
+
+
+                    </section>
+                  <div id="shopify-section-template--15058976768185__1631000572049cc62d" class="shopify-section spaced-section spaced-section--full-width"><link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-image-with-text.css?v=9385084199733401894" rel="stylesheet" type="text/css" media="all" />
+
+                    <div class="image-with-text page-width color-scheme-accent-1">
+                      <div class="image-with-text__grid color-accent-1 grid grid--gapless grid--1-col grid--2-col-tablet gradient">
+                        <div class="grid__item">
+                          <div class="image-with-text__media image-with-text__media--adapt media" style="padding-bottom: 75.0%;">
+                            <img srcset="//cdn.shopify.com/s/files/1/0600/5473/2985/files/P9130238_165x.jpg?v=1632796439 165w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/P9130238_360x.jpg?v=1632796439 360w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/P9130238_535x.jpg?v=1632796439 535w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/P9130238_750x.jpg?v=1632796439 750w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/P9130238_1070x.jpg?v=1632796439 1070w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/P9130238_1500x.jpg?v=1632796439 1500w," src="//cdn.shopify.com/s/files/1/0600/5473/2985/files/P9130238_1500x.jpg?v=1632796439" sizes="(min-width: 1600px) 750px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" alt="" loading="lazy" width="4608" height="3456" /></div>
+                        </div>
+                        <div class="grid__item">
+                          <div class="image-with-text__content image-with-text__content--adapt"><h2 class="image-with-text__heading h1">
+                                    Floral Class
+                                  </h2><div class="image-with-text__text rte"><p>Come and join us!<br />Suitable for those who are interested in floral design. Our class will start from the basic maintenance of flowers, colors and shape matching to the arrangement skill or packing.</p></div><a href="/workshop" class="button button--primary">
+                                      Detail
+                                    </a></div>
+                </div>
+              </div>
+            </div>
+
+
+            </div>
+
+                  <!--from guest-->
+                  <t t-call="theme_garden.guest_list" />
+
+                  <!-- Blog list sections -->
+                  <t t-call="theme_garden.blog_featured" />
+
+                </main>
+
+          </div>
+        </xpath>
+    </template>
+</odoo>

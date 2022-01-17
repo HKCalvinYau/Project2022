@@ -1,0 +1,25 @@
+#*-* coding utf-8 *-*
+{
+    'name': 'Gardenia Floral Theme',
+    'description': 'Gardenia Floral Theme shipped to Odoo.',
+    'version': '1.0',
+    'author': 'X',
+    'data': [   'views/layout.xml',
+    			'views/submenu.xml',
+                'views/blog_featured.xml',
+                'views/guest_list.xml',
+                'views/header.xml',
+                'views/footer.xml',
+                'views/home.xml',
+                'views/shop.xml',
+    		    'views/assets.xml',
+    		    'views/about.xml',
+                'views/delivery_info.xml',
+                'views/media_coverage.xml',
+                'views/workshop.xml',
+                'views/contact.xml',
+                ],
+                
+    'category': 'Theme/Creative',
+    'depends': ['website'],
+}

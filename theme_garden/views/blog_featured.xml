@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="blog_featured" name="Theme Garden Blog home posts">
+        <section id="shopify-section-template--15283155665081__1633488323d23b8265" class="shopify-section spaced-section spaced-section--full-width">
+            <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-slider.css?v=8200683548770782072" media="all" onload="this.media='all'" />
+            <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-card.css?v=9252431989618201249" media="all" onload="this.media='all'" />
+            <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-article-card.css?v=13280276571795379847" media="all" onload="this.media='all'" />
+            <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-featured-blog.css?v=13863197538545919654" media="all" onload="this.media='all'" />
+
+            <noscript>
+                <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-slider.css?v=8200683548770782072" rel="stylesheet" type="text/css" media="all" /></noscript>
+            <noscript>
+                <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-card.css?v=9252431989618201249" rel="stylesheet" type="text/css" media="all" /></noscript>
+            <noscript>
+                <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-article-card.css?v=13280276571795379847" rel="stylesheet" type="text/css" media="all" /></noscript>
+
+            <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-featured-blog.css?v=13863197538545919654" rel="stylesheet" type="text/css" media="all" />
+
+            <div class="blog">
+            <div class="page-width-desktop">
+                <div class="title-wrapper-with-link title-wrapper--self-padded-tablet-down">
+                <h2 class="blog__title">Blog posts</h2><a href="/blogs/our-blog" class="link underlined-link large-up-hide">
+                    View all
+                    </a></div><slider-component class="slider-mobile-gutter">
+                    <ul id="Slider-template--15283155665081__1633488323d23b8265" class="blog__posts articles-wrapper grid grid--peek grid--2-col-tablet grid--3-col-desktop slider slider--tablet blog__posts--3-items" role="list"><li class="blog__post grid__item article slider__slide slider__slide--full-width">
+                        
+
+            <article class="article-card" aria-labelledby="Article-557656932537">
+            <a href="/blogs/our-blog/especially-for-goodbye-dear" class="article-content motion-reduce"><div class="article-card__image-wrapper">
+                    <div class="article-card__image media media--landscape">
+                    <img srcset="//cdn.shopify.com/s/files/1/0600/5473/2985/articles/60_165x.png?v=1640784051 165w,//cdn.shopify.com/s/files/1/0600/5473/2985/articles/60_360x.png?v=1640784051 360w,//cdn.shopify.com/s/files/1/0600/5473/2985/articles/60_533x.png?v=1640784051 533w,//cdn.shopify.com/s/files/1/0600/5473/2985/articles/60_720x.png?v=1640784051 720w,//cdn.shopify.com/s/files/1/0600/5473/2985/articles/60_1000x.png?v=1640784051 1000w,//cdn.shopify.com/s/files/1/0600/5473/2985/articles/60_1500x.png?v=1640784051 1500w," src="//cdn.shopify.com/s/files/1/0600/5473/2985/articles/60_533x.png?v=1640784051" sizes="(min-width: 1600px) 750px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" alt="Especially for Goodbye Dear" width="2160" height="2160" loading="lazy" class="motion-reduce" />
+                    </div>
+                </div><div class="article-card__info">
+                <header class="article-card__header">
+                    <h2 class="article-card__title" id="Article-557656932537">
+                    Especially for Goodbye Dear
+                    </h2><span class="circle-divider caption-with-letter-spacing"><time datetime="2021-12-29T13:20:50Z">December 2021</time></span></header><p class="article-card__excerpt rte-width">謝謝Goodbye Dear與本工作室合作 ...more
+            </p><div class="article-card__footer"></div>
+                </div>
+            </a>
+            </article>
+
+                        </li><li class="blog__post grid__item article slider__slide slider__slide--full-width">
+                        
+
+            <article class="article-card" aria-labelledby="Article-557620494521">
+            <a href="/blogs/our-blog/%E8%B2%B4%E6%97%8F%E6%9D%BE-%E8%81%96%E8%AA%95%E6%A8%B9" class="article-content motion-reduce"><div class="article-card__image-wrapper">
+                    <div class="article-card__image media media--landscape">
+                    <img srcset="//cdn.shopify.com/s/files/1/0600/5473/2985/articles/Square_3_dbf1bccb-e4db-4151-91fd-c517b01623cd_165x.png?v=1639828585 165w,//cdn.shopify.com/s/files/1/0600/5473/2985/articles/Square_3_dbf1bccb-e4db-4151-91fd-c517b01623cd_360x.png?v=1639828585 360w,//cdn.shopify.com/s/files/1/0600/5473/2985/articles/Square_3_dbf1bccb-e4db-4151-91fd-c517b01623cd_533x.png?v=1639828585 533w,//cdn.shopify.com/s/files/1/0600/5473/2985/articles/Square_3_dbf1bccb-e4db-4151-91fd-c517b01623cd_720x.png?v=1639828585 720w,//cdn.shopify.com/s/files/1/0600/5473/2985/articles/Square_3_dbf1bccb-e4db-4151-91fd-c517b01623cd_1000x.png?v=1639828585 1000w,//cdn.shopify.com/s/files/1/0600/5473/2985/articles/Square_3_dbf1bccb-e4db-4151-91fd-c517b01623cd_1500x.png?v=1639828585 1500w," src="//cdn.shopify.com/s/files/1/0600/5473/2985/articles/Square_3_dbf1bccb-e4db-4151-91fd-c517b01623cd_533x.png?v=1639828585" sizes="(min-width: 1600px) 750px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" alt="貴族松 (聖誕樹)" width="2160" height="2160" loading="lazy" class="motion-reduce" />
+                    </div>
+                </div><div class="article-card__info">
+                <header class="article-card__header">
+                    <h2 class="article-card__title" id="Article-557620494521">
+                    貴族松 (聖誕樹)
+                    </h2><span class="circle-divider caption-with-letter-spacing"><time datetime="2021-12-18T11:56:24Z">December 2021</time></span></header><p class="article-card__excerpt rte-width">貴族松有一種獨特的松樹香味... more
+            </p><div class="article-card__footer"></div>
+                </div>
+            </a>
+            </article>
+
+                        </li><li class="blog__post grid__item article slider__slide slider__slide--full-width">
+                        
+
+            <article class="article-card" aria-labelledby="Article-557532053689">
+            <a href="/blogs/our-blog/%E9%87%8D%E7%93%A3%E5%90%91%E6%97%A5%E8%91%B5" class="article-content motion-reduce"><div class="article-card__image-wrapper">
+                    <div class="article-card__image media media--landscape">
+                    <img srcset="//cdn.shopify.com/s/files/1/0600/5473/2985/articles/38_165x.png?v=1637902275 165w,//cdn.shopify.com/s/files/1/0600/5473/2985/articles/38_360x.png?v=1637902275 360w,//cdn.shopify.com/s/files/1/0600/5473/2985/articles/38_533x.png?v=1637902275 533w,//cdn.shopify.com/s/files/1/0600/5473/2985/articles/38_720x.png?v=1637902275 720w,//cdn.shopify.com/s/files/1/0600/5473/2985/articles/38_1000x.png?v=1637902275 1000w,//cdn.shopify.com/s/files/1/0600/5473/2985/articles/38_1500x.png?v=1637902275 1500w," src="//cdn.shopify.com/s/files/1/0600/5473/2985/articles/38_533x.png?v=1637902275" sizes="(min-width: 1600px) 750px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" alt="重瓣向日葵" width="3240" height="3240" loading="lazy" class="motion-reduce" />
+                    </div>
+                </div><div class="article-card__info">
+                <header class="article-card__header">
+                    <h2 class="article-card__title" id="Article-557532053689">
+                    重瓣向日葵
+                    </h2><span class="circle-divider caption-with-letter-spacing"><time datetime="2021-11-26T04:51:13Z">November 2021</time></span></header><p class="article-card__excerpt rte-width">重瓣向日葵是向日葵的變種... more
+            </p><div class="article-card__footer"></div>
+                </div>
+            </a>
+            </article>
+
+                        </li></ul><div class="slider-buttons no-js-hidden">
+                        <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="Slide left" disabled="true"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+            </path></svg>
+            </button>
+                        <div class="slider-counter caption">
+                        <span class="slider-counter--current">1</span>
+                        <span aria-hidden="true"> / </span>
+                        <span class="visually-hidden">of</span>
+                        <span class="slider-counter--total">1</span>
+                        </div>
+                        <button type="button" class="slider-button slider-button--next" name="next" aria-label="Slide right" disabled="true"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+            </path></svg>
+            </button>
+                    </div></slider-component><div class="blog__view-all center small-hide medium-hide">
+                    <a href="/our-blog-1" class="blog__button button">
+                        View all
+                    </a>
+                    </div></div>
+            </div>
+
+
+        </section>
+
+    </template>
+</odoo>

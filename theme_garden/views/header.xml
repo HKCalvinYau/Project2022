@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="website_header_custom" inherit_id="portal.frontend_layout" name="Header">
+            <xpath expr="//header/nav" position="replace">
+                <div id="shopify-section-announcement-bar" class="shopify-section">
+				    <div class="announcement-bar color-accent-1 gradient" role="region" aria-label="Announcement"><a href="https://wa.me/85262763520" class="announcement-bar__link link link--text focus-inset animate-arrow">
+				        <p class="announcement-bar__message h5">
+				                For the Same-Day Delivery, please contact us +852 6276 3520
+				            <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
+				                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
+				                </path>
+				            </svg>
+				
+				            </p>
+				        </a>
+				    </div>
+				</div>
+
+                <div id="shopify-section-header" class="shopify-section">
+                    <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-list-menu.css?v=16161438381095850843" media="all" onload="this.media='all'" />
+                    <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-search.css?v=12866219812189939979" media="all" onload="this.media='all'" />
+                    <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-menu-drawer.css?v=9791499379442220150" media="all" onload="this.media='all'" />
+                    <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-cart-notification.css?v=8713513140257519663" media="all" onload="this.media='all'" />
+                    <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-price.css?v=18355640432874979228" media="all" onload="this.media='all'" />
+                    <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-loading-overlay.css?v=8507244000641785207" media="all" onload="this.media='all'" />
+                    <noscript><link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-list-menu.css?v=16161438381095850843" rel="stylesheet" type="text/css" media="all" /></noscript>
+                    <noscript><link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-search.css?v=12866219812189939979" rel="stylesheet" type="text/css" media="all" /></noscript>
+                    <noscript><link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-menu-drawer.css?v=9791499379442220150" rel="stylesheet" type="text/css" media="all" /></noscript>
+                    <noscript><link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-cart-notification.css?v=8713513140257519663" rel="stylesheet" type="text/css" media="all" /></noscript>
+                    
+                    <style>
+                            header-drawer {
+                                justify-self: start;
+                                margin-left: -1.2rem;
+                            }
+                            
+                            @media screen and (min-width: 990px) {
+                                header-drawer {
+                                display: none;
+                                }
+                            }
+                            
+                            .menu-drawer-container {
+                                display: flex;
+                            }
+                            
+                            .list-menu {
+                                list-style: none;
+                                padding: 0;
+                                margin: 0;
+                            }
+                            
+                            .list-menu--inline {
+                                display: inline-flex;
+                                flex-wrap: wrap;
+                            }
+                            
+                            summary.list-menu__item {
+                                padding-right: 2.7rem;
+                            }
+                            
+                            .list-menu__item {
+                                display: flex;
+                                align-items: center;
+                                line-height: 1.3;
+                            }
+                            
+                            .list-menu__item--link {
+                                text-decoration: none;
+                                padding-bottom: 1rem;
+                                padding-top: 1rem;
+                                line-height: 1.8;
+                            }
+                            
+                            @media screen and (min-width: 750px) {
+                                .list-menu__item--link {
+                                padding-bottom: 0.5rem;
+                                padding-top: 0.5rem;
+                                }
+                            }
+                    </style>
+                    
+                    <!-- 
+                    <script src="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/details-disclosure.js?v=13038332117477895503" defer="defer"></script>
+                    <script src="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/details-modal.js?v=2823698460638883051" defer="defer"></script>
+                    <script src="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/cart-notification.js?v=1877081553624793631" defer="defer"></script>
+                    -->
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" class="hidden">
+                    <symbol id="icon-search" viewBox="0 0 18 19" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.03 11.68A5.784 5.784 0 112.85 3.5a5.784 5.784 0 018.18 8.18zm.26 1.12a6.78 6.78 0 11.72-.7l5.4 5.4a.5.5 0 11-.71.7l-5.41-5.4z" fill="currentColor"></path>
+                    </symbol>
+                    
+                    <symbol id="icon-close" class="icon icon-close" fill="none" viewBox="0 0 18 17">
+                        <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
+                    </path></symbol>
+                    </svg>
+                    <sticky-header class="header-wrapper color-background-1 gradient header-wrapper--border-bottom">
+                    <header class="header header--middle-left page-width header--has-menu"><header-drawer data-breakpoint="tablet">
+                            <details class="menu-drawer-container">
+                            <summary class="header__icon header__icon--menu header__icon--summary link link--text focus-inset" aria-label="Menu" role="button" aria-expanded="false" aria-controls="menu-drawer">
+                                <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="icon icon-hamburger" fill="none" viewBox="0 0 18 16">
+                    <path d="M1 .5a.5.5 0 100 1h15.71a.5.5 0 000-1H1zM.5 8a.5.5 0 01.5-.5h15.71a.5.5 0 010 1H1A.5.5 0 01.5 8zm0 7a.5.5 0 01.5-.5h15.71a.5.5 0 010 1H1a.5.5 0 01-.5-.5z" fill="currentColor">
+                    </path></svg>
+                    
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" fill="none" viewBox="0 0 18 17">
+                    <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
+                    </path></svg>
+                    
+                                </span>
+                            </summary>
+                            <div id="menu-drawer" class="menu-drawer motion-reduce" tabindex="-1">
+                                <div class="menu-drawer__inner-container">
+                                <div class="menu-drawer__navigation-container">
+                                    <nav class="menu-drawer__navigation">
+                                    <ul class="menu-drawer__menu list-menu" role="list"><li><a href="/" class="menu-drawer__menu-item list-menu__item link link--text focus-inset menu-drawer__menu-item--active" aria-current="page">
+                                                Home
+                                            </a></li><li><a href="/pages/about-us" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                                                About Us
+                                            </a></li><li><details>
+                                                <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset" role="button" aria-expanded="false" aria-controls="link-Store">
+                                                Store
+                                                <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
+                    </path></svg>
+                    
+                                                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                    </path></svg>
+                    
+                                                </summary>
+                                                <div id="link-Store" class="menu-drawer__submenu motion-reduce" tabindex="-1">
+                                                <div class="menu-drawer__inner-submenu">
+                                                    <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+                                                    <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
+                    </path></svg>
+                    
+                                                    Store
+                                                    </button>
+                                                    <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1"><li><a href="/collections/all" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                                            Shop ALL
+                                                            </a></li><li><a href="/collections/bouquet" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                                            Bouquet
+                                                            </a></li><li><a href="/collections/flower-box" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                                            Flower Box
+                                                            </a></li><li><a href="/collections/flower-in-vase" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                                            Flower in vase
+                                                            </a></li><li><a href="/collections/fruit-hamper" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                                            Fruit Hamper
+                                                            </a></li><li><a href="/collections/opening" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                                            Opening
+                                                            </a></li><li><a href="/collections/preserved-flower" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                                            Preserved Flower
+                                                            </a></li><li><a href="/collections/synpathy" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                                            Sympathy
+                                                            </a></li><li><a href="/collections/wine-hamper-2" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                                            Wine Hamper
+                                                            </a></li><li><a href="/collections/additional" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                                            Additional
+                                                            </a></li></ul>
+                                                </div>
+                                                </div>
+                                            </details></li><li><a href="/collections/orchid" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                                                CNY 2022
+                                            </a></li><li><a href="/pages/workshop" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                                                Workshop
+                                            </a></li><li><a href="/blogs/our-blog" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                                                Blog
+                                            </a></li><li><a href="/pages/delivery-info" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                                                Delivery Info
+                                            </a></li><li><a href="/pages/media-coverage" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                                                Media Coverage
+                                            </a></li><li><a href="/pages/contact-us" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                                                Contact us
+                                            </a></li></ul>
+                                    </nav>
+                                    
+                                    <div class="menu-drawer__utility-links"><a href="/account/login" class="menu-drawer__account link link--text focus-inset h5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="icon icon-account" fill="none" viewBox="0 0 18 19">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 4.5a3 3 0 116 0 3 3 0 01-6 0zm3-4a4 4 0 100 8 4 4 0 000-8zm5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15zM9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35z" fill="currentColor">
+                    </path></svg>
+                    
+                    Log in</a><ul class="list list-social list-unstyled" role="list"><li class="list-social__item">
+                                            <a href="https://facebook.com/gardenia.floral.studio" class="link link--text list-social__link" aria-describedby="a11y-external-message"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-facebook" viewBox="0 0 18 18">
+                    <path fill="currentColor" d="M16.42.61c.27 0 .5.1.69.28.19.2.28.42.28.7v15.44c0 .27-.1.5-.28.69a.94.94 0 01-.7.28h-4.39v-6.7h2.25l.31-2.65h-2.56v-1.7c0-.4.1-.72.28-.93.18-.2.5-.32 1-.32h1.37V3.35c-.6-.06-1.27-.1-2.01-.1-1.01 0-1.83.3-2.45.9-.62.6-.93 1.44-.93 2.53v1.97H7.04v2.65h2.24V18H.98c-.28 0-.5-.1-.7-.28a.94.94 0 01-.28-.7V1.59c0-.27.1-.5.28-.69a.94.94 0 01.7-.28h15.44z">
+                    </path></svg>
+                    <span class="visually-hidden">Facebook</span>
+                                            </a>
+                                        </li><li class="list-social__item">
+                                            <a href="http://instagram.com/gardenia.floral.studio" class="link link--text list-social__link" aria-describedby="a11y-external-message"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-instagram" viewBox="0 0 18 18">
+                    <path fill="currentColor" d="M8.77 1.58c2.34 0 2.62.01 3.54.05.86.04 1.32.18 1.63.3.41.17.7.35 1.01.66.3.3.5.6.65 1 .12.32.27.78.3 1.64.05.92.06 1.2.06 3.54s-.01 2.62-.05 3.54a4.79 4.79 0 01-.3 1.63c-.17.41-.35.7-.66 1.01-.3.3-.6.5-1.01.66-.31.12-.77.26-1.63.3-.92.04-1.2.05-3.54.05s-2.62 0-3.55-.05a4.79 4.79 0 01-1.62-.3c-.42-.16-.7-.35-1.01-.66-.31-.3-.5-.6-.66-1a4.87 4.87 0 01-.3-1.64c-.04-.92-.05-1.2-.05-3.54s0-2.62.05-3.54c.04-.86.18-1.32.3-1.63.16-.41.35-.7.66-1.01.3-.3.6-.5 1-.65.32-.12.78-.27 1.63-.3.93-.05 1.2-.06 3.55-.06zm0-1.58C6.39 0 6.09.01 5.15.05c-.93.04-1.57.2-2.13.4-.57.23-1.06.54-1.55 1.02C1 1.96.7 2.45.46 3.02c-.22.56-.37 1.2-.4 2.13C0 6.1 0 6.4 0 8.77s.01 2.68.05 3.61c.04.94.2 1.57.4 2.13.23.58.54 1.07 1.02 1.56.49.48.98.78 1.55 1.01.56.22 1.2.37 2.13.4.94.05 1.24.06 3.62.06 2.39 0 2.68-.01 3.62-.05.93-.04 1.57-.2 2.13-.41a4.27 4.27 0 001.55-1.01c.49-.49.79-.98 1.01-1.56.22-.55.37-1.19.41-2.13.04-.93.05-1.23.05-3.61 0-2.39 0-2.68-.05-3.62a6.47 6.47 0 00-.4-2.13 4.27 4.27 0 00-1.02-1.55A4.35 4.35 0 0014.52.46a6.43 6.43 0 00-2.13-.41A69 69 0 008.77 0z"></path>
+                    <path fill="currentColor" d="M8.8 4a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm0 7.43a2.92 2.92 0 110-5.85 2.92 2.92 0 010 5.85zM13.43 5a1.05 1.05 0 100-2.1 1.05 1.05 0 000 2.1z">
+                    </path></svg>
+                    <span class="visually-hidden">Instagram</span>
+                                            </a>
+                                        </li></ul>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </details>
+                        </header-drawer>
+                        <h1 class="header__heading">
+                            <a href="/" class="header__heading-link link link--text focus-inset">
+                                <!-- Header logo -->
+                                    <span t-field="res_company.logo" t-options="{'widget': 'image'}" role="img" t-att-aria-label="'Logo of %s' % res_company.name" t-att-title="res_company.name" class="header__heading-logo" width="1319" height="1920"/>
+                            </a>
+                        
+                        </h1>
+
+                        <nav class="header__inline-menu">
+                            <ul class="list-menu list-menu--inline" role="list">
+                                    <t t-foreach="website.menu_id.child_id" t-as="submenu">
+                                        <t t-call="theme_garden.submenu">
+                                            <t t-set="item_class" t-value="'nav-item'"/>
+                                            <t t-set="link_class" t-value="'nav-link'"/>
+                                        </t>
+                                    </t>
+
+
+                                    <!-- 
+                                    <li>
+                                        <details-disclosure>
+                                        <details>
+                                            <summary class="header__menu-item list-menu__item link focus-inset">
+                                                <span>Store</span>
+                                                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                                                </path></svg>
+                                            </summary>
+
+                                            <ul class="header__submenu list-menu list-menu-di-sclosure caption-large motion-reduce" role="list" tabindex="-1">
+                                                <li>
+                                                    <a href="/collections/all" class="header__menu-item list-menu__item link link-te-xt focus-inset caption-large">
+                                                        Shop ALL
+                                                        </a></li><li><a href="/collections/bouquet" class="header__menu-item list-menu__item link link-t-ext focus-inset caption-large">
+                                                        Bouquet
+                                                        </a></li><li><a href="/collections/flower-box" class="header__menu-item list-menu__item link link-te-xt focus-inset caption-large">
+                                                        Flower Box
+                                                        </a></li><li><a href="/collections/flower-in-vase" class="header__menu-item list-menu__item link link-t-ext focus-inset caption-large">
+                                                        Flower in vase
+                                                        </a></li><li><a href="/collections/fruit-hamper" class="header__menu-item list-menu__item link link-t-ext focus-inset caption-large">
+                                                        Fruit Hamper
+                                                        </a></li><li><a href="/collections/opening" class="header__menu-item list-menu__item link link-t-ext focus-inset caption-large">
+                                                        Opening
+                                                        </a></li><li><a href="/collections/preserved-flower" class="header__menu-item list-menu__item link link-t-ext focus-inset caption-large">
+                                                        Preserved Flower
+                                                        </a></li><li><a href="/collections/synpathy" class="header__menu-item list-menu__item link link-t-ext focus-inset caption-large">
+                                                        Sympathy
+                                                        </a></li><li><a href="/collections/wine-hamper-2" class="header__menu-item list-menu__item link link-t-ext focus-inset caption-large">
+                                                        Wine Hamper
+                                                        </a></li><li><a href="/collections/additional" class="header__menu-item list-menu__item link link-t-ext focus-inset caption-large">
+                                                        Additional
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </details>
+                                        </details-disclosure>
+                                    </li>
+                                    -->
+                                    
+                            </ul>
+                        </nav>
+
+                        <div class="header__icons">
+                        <details-modal class="header__search">
+                            <details>
+                            <summary class="header__icon header__icon--search header__icon--summary link link--text focus-inset modal__toggle" aria-haspopup="dialog" aria-label="Search" role="button" aria-expanded="false">
+                                <span>
+                                <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                                    <use href="#icon-search">
+                                </use></svg>
+                                <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                                    <use href="#icon-close">
+                                </use></svg>
+                                </span>
+                            </summary>
+                            <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="Search">
+                                <div class="modal-overlay"></div>
+                                <div class="search-modal__content" tabindex="-1"><predictive-search class="search-modal__form" data-loading-text="Loading..."><form action="/search" method="get" role="search" class="search search-modal__form">
+                                    <div class="field">
+                                        <input class="search__input field__input" id="Search-In-Modal" type="search" name="q" value="" placeholder="Search" role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" />
+                                        <label class="field__label" for="Search-In-Modal">Search</label>
+                                        <input type="hidden" name="options[prefix]" value="last" />
+                                        <button class="search__button field__button" aria-label="Search">
+                                        <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                                            <use href="#icon-search">
+                                        </use></svg>
+                                        </button> 
+                                    </div><div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search="">
+                                        <div class="predictive-search__loading-state">
+                                            <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                                            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                                            </svg>
+                                        </div>
+                                        </div>
+                    
+                                        <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span></form></predictive-search><button type="button" class="search-modal__close-button modal__close-button link link--text focus-inset" aria-label="Close">
+                                    <svg class="icon icon-close" aria-hidden="true" focusable="false" role="presentation">
+                                    <use href="#icon-close">
+                                    </use></svg>
+                                </button>
+                                </div>
+                            </div>
+                            </details>
+                        </details-modal><a href="/account/login" class="header__icon header__icon--account link link--text focus-inset small-hide">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="icon icon-account" fill="none" viewBox="0 0 18 19">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6 4.5a3 3 0 116 0 3 3 0 01-6 0zm3-4a4 4 0 100 8 4 4 0 000-8zm5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15zM9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35z" fill="currentColor">
+                    </path></svg>
+                    
+                            <span class="visually-hidden">Log in</span>
+                            </a><a href="/cart" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble"><svg class="icon icon-cart-empty" aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
+                    <path d="m15.75 11.8h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33l-.78-11.61zm0 1h-2.22l-.71 10.67a4 4 0 0 0 3.99 4.27h7.38a4 4 0 0 0 4-4.27l-.72-10.67h-2.22v.63a4.75 4.75 0 1 1 -9.5 0zm8.5 0h-7.5v.63a3.75 3.75 0 1 0 7.5 0z" fill="currentColor" fill-rule="evenodd"></path>
+                    </svg>
+                    <span class="visually-hidden">Cart</span></a>
+                        </div>
+                    </header>
+                    </sticky-header>
+                    
+                    <cart-notification>
+                    <div class="cart-notification-wrapper page-width color-background-1">
+                        <div id="cart-notification" class="cart-notification focus-inset" aria-modal="true" aria-label="Item added to your cart" role="dialog" tabindex="-1">
+                        <div class="cart-notification__header">
+                            <h2 class="cart-notification__heading caption-large"><svg class="icon icon-checkmark color-foreground-text" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 9" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.35.643a.5.5 0 01.006.707l-6.77 6.886a.5.5 0 01-.719-.006L.638 4.845a.5.5 0 11.724-.69l2.872 3.011 6.41-6.517a.5.5 0 01.707-.006h-.001z" fill="currentColor"></path>
+                    </svg>
+                            Item added to your cart</h2>
+                            <button type="button" class="cart-notification__close modal__close-button link link--text focus-inset" aria-label="Close">
+                            <svg class="icon icon-close" aria-hidden="true" focusable="false"><use href="#icon-close"></use></svg>
+                            </button>
+                        </div>
+                        <div id="cart-notification-product" class="cart-notification-product"></div>
+                        <div class="cart-notification__links">
+                            <a href="/cart" id="cart-notification-button" class="button button--secondary button--full-width"></a>
+                            <form action="/cart" method="post" id="cart">
+                            <button class="button button--primary button--full-width" name="checkout" form="cart">Check out</button>
+                            </form>
+                            <button type="button" class="link button-label">Continue shopping</button>
+                        </div>
+                        </div>
+                    </div>
+                    </cart-notification>
+                    <style data-shopify="">
+                    .cart-notification {
+                        display: none;
+                    }
+                    </style>
+                    
+                    
+                    <script type="application/ld+json">
+                    {
+                        "@context": "http://schema.org",
+                        "@type": "Organization",
+                        "name": "Gardenia Floral Studio",
+                        
+                        
+                        "logo": "https:\/\/cdn.shopify.com\/s\/files\/1\/0600\/5473\/2985\/files\/Gardenia_edited-01_1319x.png?v=1638325384",
+                        
+                        "sameAs": [
+                        "",
+                        "https:\/\/facebook.com\/gardenia.floral.studio",
+                        "",
+                        "http:\/\/instagram.com\/gardenia.floral.studio",
+                        "",
+                        "",
+                        "",
+                        ""
+                        ],
+                        "url": "https:\/\/gardeniafloral.myshopify.com"
+                    }
+                    </script>
+                    <script type="application/ld+json">
+                        {
+                        "@context": "http://schema.org",
+                        "@type": "WebSite",
+                        "name": "Gardenia Floral Studio",
+                        "potentialAction": {
+                            "@type": "SearchAction",
+                            "target": "https:\/\/gardeniafloral.myshopify.com\/search?q={search_term_string}",
+                            "query-input": "required name=search_term_string"
+                        },
+                        "url": "https:\/\/gardeniafloral.myshopify.com"
+                        }
+                    </script>
+                    </div>
+
+				
+            </xpath>
+        </template>
+    
+    
+    
+    
+    
+</odoo>

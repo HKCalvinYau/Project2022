@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="theme_garden-contact" name="Contact Us" inherit_id="website.contactus">
+            <xpath expr="//div[@id='wrap']" position="replace">
+               <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+                    <section id="shopify-section-template--15058976604345__main" class="shopify-section spaced-section">
+                        <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-main-page.css?v=84867745912520153" media="all" onload="this.media='all'" />
+                        <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rte.css?v=8404376346561933237" media="all" onload="this.media='all'" />
+                        <noscript><link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-main-page.css?v=84867745912520153" rel="stylesheet" type="text/css" media="all" /></noscript>
+                        <noscript><link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rte.css?v=8404376346561933237" rel="stylesheet" type="text/css" media="all" /></noscript>
+
+                        <div class="page-width page-width--narrow">
+                        <h1 class="main-page-title page-title h0">
+                            Contact us
+                        </h1>
+                        <div class="rte">
+                        </div>
+                        </div>
+
+
+
+
+                        </section>
+
+                        <section id="shopify-section-template--15058976604345__form" class="shopify-section spaced-section">
+                        <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-contact-form.css?v=9881062936250842546" rel="stylesheet" type="text/css" media="all" />
+
+                        <div class="contact page-width page-width--narrow spaced-section">
+                        <h2 class="title">Please let us know how we can help you</h2>
+                        <form method="post" action="/website_form/" id="ContactForm" accept-charset="UTF-8" class="contact-form" enctype="multipart/form-data" data-success_page="/contactus-thank-you">
+                        <input type="hidden" name="subject" value="Inquiry" />
+                    
+                        <!-- 
+                            <div class="form-status form-status-list form__message" tabindex="-1" autofocus="">
+                            Thanks for contacting us. We'll get back to you as soon as possible.
+                        </div>
+                        -->
+                        
+                        
+                        <div class="contact__fields">
+                            <div class="field">
+                                <input class="field__input" autocomplete="name" type="text" id="contact1" name="Name" value="" placeholder="Name" required=""/>
+                                <label class="field__label" for="ContactForm-name">Name</label>
+                            </div>
+                            <div class="field field--with-error">
+                                <input autocomplete="email" type="email" id="contact" class="field__input" name="email_from" spellcheck="false" autocapitalize="off" value="" aria-required="true" placeholder="Email" required="" />
+                                <label class="field__label" for="ContactForm-email">Email <span aria-hidden="true">*</span></label></div>
+                            </div>
+                            <div class="field">
+                            <input type="tel" id="contact2" class="field__input" autocomplete="tel" name="Phone" pattern="[0-9\-]*" value="" placeholder="Phone number" />
+                            <label class="field__label" for="ContactForm-phone">Phone number</label>
+                            </div>
+                            <div class="field">
+                            <textarea rows="10" id="contact6" class="text-area field__input" name="Description" placeholder="Comment"></textarea>
+                            <label class="form__label field__label" for="ContactForm-body">Comment</label>
+                            </div>
+                            <div class="contact__button">
+                            <button type="submit" class="button">
+                                Send
+                            </button>
+                            </div></form></div>
+
+
+                        </section>
+                        
+                        <section id="shopify-section-template--15058976604345__1632764090ca1c1a15" class="shopify-section spaced-section">
+                        <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rte.css?v=8404376346561933237" media="all" onload="this.media='all'" />
+                        <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-main-page.css?v=84867745912520153" media="all" onload="this.media='all'" />
+
+                        <noscript><link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rte.css?v=8404376346561933237" rel="stylesheet" type="text/css" media="all" /></noscript>
+                        <noscript><link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-main-page.css?v=84867745912520153" rel="stylesheet" type="text/css" media="all" /></noscript>
+
+                        <div class="page-width page-width--narrow">
+                        <h2 class="page-title">Find us
+                        </h2>
+                        <div class="rte"><div style="text-align: left;">
+                        <strong>MTR</strong>: Kwun Tong Station Exit B1</div>
+                        <div style="text-align: left;">
+                        <strong>Bus</strong>: 11D, 23, 258X, 259X, 268C, 269C, 40, 40P, 69C, 74D, 74X, 797, 80, 80X, 83A</div>
+                        <div style="text-align: left;">
+                        <strong>Minibus</strong>: 22A</div>
+                        <div style="text-align: left;">
+                        <strong>Ferry</strong>: From North Point or Sai Wan Ho</div>
+                        <div style="text-align: left;"></div>
+                        <div style="text-align: left;"></div>
+                        <div style="text-align: left;"></div>
+                        <div style="text-align: left;"></div>
+                        <div style="text-align: left;"></div>
+                        <div style="text-align: left;"></div>
+                        <div style="text-align: left;"></div>
+                        <div style="text-align: left;"></div>
+                        <div style="text-align: left;"></div>
+                        <div style="text-align: center;"></div>
+                        <div style="text-align: center;"></div>
+                        <div style="text-align: center;"></div>
+                        <div style="text-align: center;">
+                        
+                        <img src="/theme_garden/static/src/images/contact/contact-map.jpg" style="margin: 0pxpx 0pxpx 0pxpx 0pxpx;float: none;" width="600x600" height="600x600" /></div>
+                        </div>
+                        </div>
+
+
+                        </section>
+    </main>
+            </xpath>
+        </template>
+    </data>
+</odoo>

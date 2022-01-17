@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="guest_list" name="Guest Post list">
+        <section id="shopify-section-template--15058976866489__1633488346ccec34aa" class="shopify-section spaced-section spaced-section--full-width">
+            <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-multicolumn.css?v=16443352588419037275" rel="stylesheet" type="text/css" media="all" />
+            <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-slider.css?v=8200683548770782072" media="all" onload="this.media='all'" />
+            <noscript><link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-slider.css?v=8200683548770782072" rel="stylesheet" type="text/css" media="all" /></noscript>
+
+            <div class="multicolumn background-primary">
+            <div class="page-width">
+                <div class="title-wrapper-with-link title-wrapper--self-padded-mobile">
+                <h2 class="title">
+                    From our guests
+                </h2></div>
+                <slider-component class="slider-mobile-gutter">
+                <ul class="multicolumn-list grid grid--1-col grid--3-col-tablet" id="Slider-template--15058976866489__1633488346ccec34aa" role="list"><li class="multicolumn-list__item grid__item">
+                        <div class="multicolumn-card">
+                            <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--full-width multicolumn-card-spacing">
+                            <div class="media media--transparent media--adapt" style="padding-bottom: 100.0%;">
+                                <img srcset="//cdn.shopify.com/s/files/1/0600/5473/2985/files/Hello_beautiful_2_275x.png?v=1633591286 275w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/Hello_beautiful_2_550x.png?v=1633591286 550w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/Hello_beautiful_2_710x.png?v=1633591286 710w," src="//cdn.shopify.com/s/files/1/0600/5473/2985/files/Hello_beautiful_2_550x.png?v=1633591286" sizes="(min-width: 990px) 550px,
+                                    (min-width: 750px) 550px,
+                                    calc(100vw - 30px)" alt="" height="1080" width="1080" loading="lazy" />
+                            </div>
+                            </div><div class="multicolumn-card__info"><h3>畢業花</h3><div class="rte"><p>多謝你地的細心，同埋了解我地的需要，幫我地整左好靚的花束，我老公好鍾意呀！多謝！！</p><p>By Dorothy</p></div></div>
+                        </div>
+                    </li><li class="multicolumn-list__item grid__item">
+                        <div class="multicolumn-card">
+                            <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--full-width multicolumn-card-spacing">
+                            <div class="media media--transparent media--adapt" style="padding-bottom: 100.0%;">
+                                <img srcset="//cdn.shopify.com/s/files/1/0600/5473/2985/files/Square_275x.png?v=1633592201 275w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/Square_550x.png?v=1633592201 550w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/Square_710x.png?v=1633592201 710w," src="//cdn.shopify.com/s/files/1/0600/5473/2985/files/Square_550x.png?v=1633592201" sizes="(min-width: 990px) 550px,
+                                    (min-width: 750px) 550px,
+                                    calc(100vw - 30px)" alt="" height="1080" width="1080" loading="lazy" />
+                            </div>
+                            </div><div class="multicolumn-card__info"><h3>客人回饋</h3><div class="rte"><p>你地的支持，係我地最大的動力！</p></div></div>
+                        </div>
+                    </li><li class="multicolumn-list__item grid__item">
+                        <div class="multicolumn-card">
+                            <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--full-width multicolumn-card-spacing">
+                            <div class="media media--transparent media--adapt" style="padding-bottom: 100.0%;">
+                                <img srcset="//cdn.shopify.com/s/files/1/0600/5473/2985/files/Square_3_275x.png?v=1633595428 275w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/Square_3_550x.png?v=1633595428 550w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/Square_3_710x.png?v=1633595428 710w,//cdn.shopify.com/s/files/1/0600/5473/2985/files/Square_3_1420x.png?v=1633595428 1420w," src="//cdn.shopify.com/s/files/1/0600/5473/2985/files/Square_3_550x.png?v=1633595428" sizes="(min-width: 990px) 550px,
+                                    (min-width: 750px) 550px,
+                                    calc(100vw - 30px)" alt="" height="1620" width="1620" loading="lazy" />
+                            </div>
+                            </div><div class="multicolumn-card__info"><h3>開張花籃</h3><div class="rte"><p>真係好靚！朋友仔好鍾意！</p><p>By Gigi</p></div></div>
+                        </div>
+                    </li></ul></slider-component>
+                <div class="center"><a class="button button--primary" href="/pages/guest-sharing">
+                    View all
+                    </a></div>
+            </div>
+            </div>
+        </section>
+    </template>
+
+</odoo>

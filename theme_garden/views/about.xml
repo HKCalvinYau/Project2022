@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="about_garden" model="ir.ui.view">
+            <field name="name">About</field>
+            <field name="type">qweb</field>
+            <field name="key">theme_garden.about</field>
+            <field name="arch" type="xml">
+                <t name="About" t-name="theme_garden.about">
+                    <t t-call="website.layout">
+                        <div id="wrap">
+                           <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+                                <section id="shopify-section-template--15070109237433__main" class="shopify-section spaced-section">
+                                    <div class="page-width page-width--narrow">
+                                        <h1 class="main-page-title page-title h0">
+                                            About Us
+                                        </h1>
+                                        <div class="rte">
+                                
+                                        </div>
+                                    </div>
+
+
+                                </section>
+                                <div id="shopify-section-template--15070109237433__1631096282bf75c9b6" class="shopify-section spaced-section spaced-section--full-width">
+                                    <div class="image-with-text page-width color-scheme-background-1">
+                                        <div class="image-with-text__grid color-background-1 grid grid--gapless grid--1-col grid--2-col-tablet gradient">
+                                            <div class="grid__item">
+                                                <div class="image-with-text__media image-with-text__media--adapt media" style="padding-bottom: 100.0%;">
+                                                    <img src="/theme_garden/static/src/images/about/about_image_1.jpg" sizes="(min-width: 1600px) 750px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" alt="" loading="lazy" width="3410" height="3410" />
+                                                </div>
+                                            </div>
+                                            <div class="grid__item">
+                                                <div class="image-with-text__content image-with-text__content--adapt">
+                                                    <h2 class="image-with-text__heading h1">
+                                                        Welcome To Gardenia Floral Studio
+                                                    </h2>
+                                                    <div class="image-with-text__text rte">
+                                                        <p>We are a local Hong Kong florist. </p>
+                                                        <p>Gardenia Floral Studio is an innovative online florist shop that believes in the opportunity to use technology and social media to make the gift-giving process of luxury flowers easier.<br /><br />
+                                                        </p>
+                                                        <p><br /><br /></p>
+                                                        <p><br /><br /></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="shopify-section-template--15070109237433__16310963335bbb398f" class="shopify-section spaced-section spaced-section--full-width">
+                                    <link href="/theme_garden/static/src/css/component-image-with-text.css" rel="stylesheet" type="text/css" media="all" />
+                                    <div class="image-with-text page-width color-scheme-background-1">
+                                        <div class="image-with-text__grid color-background-1 grid grid--gapless grid--1-col grid--2-col-tablet gradient image-with-text__grid--reverse">
+                                            <div class="grid__item">
+                                                <div class="image-with-text__media image-with-text__media--adapt media" style="padding-bottom: 100.0%;">
+                                                    <img src="/theme_garden/static/src/images/about/about_image_2.png" sizes="(min-width: 1600px) 750px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" alt="" loading="lazy" width="1080" height="1080" />
+                                                </div>
+                                            </div>
+                                            <div class="grid__item">
+                                                <div class="image-with-text__content image-with-text__content--adapt">
+                                                    <h2 class="image-with-text__heading h1">
+                                                        OUR TEAM
+                                                    </h2>
+                                                    <div class="image-with-text__text rte">
+                                                        <p>
+                                                            Our professional florists have a huge wealth of knowledge, combined with over 10 years of experience. We welcome you into our designation and tailor-made of flower arrangement.<br /><br />
+                                                        </p>
+                                                    </div>
+                                                    <a href="/shop" class="button button--primary">
+                                                        Shop Now
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </main>
+                        </div>
+                    </t>
+                </t>
+            </field>
+        </record>
+
+        <record id="about_garden_page" model="website.page">
+            <field name="url">/about-us</field>
+            <field name="is_published">True</field>
+            <field name="view_id" ref="about_garden"/>
+            <field name="track">True</field>
+        </record>
+
+        <record id="menu_about_garden" model="website.menu">
+            <field name="name">About Us</field>
+            <field name="url">/about-us</field>
+            <field name="page_id" ref="theme_garden.about_garden_page"/>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">2</field>
+        </record>
+    </data>
+</odoo>

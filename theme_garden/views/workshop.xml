@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="workshop_garden" model="ir.ui.view">
+            <field name="name">Workshop</field>
+            <field name="type">qweb</field>
+            <field name="key">theme_garden.workshop</field>
+            <field name="arch" type="xml">
+                <t name="About" t-name="theme_garden.workshop">
+                    <t t-call="website.layout">
+                        <div id="wrap">
+                            <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+                                <section id="shopify-section-template--15058976866489__main" class="shopify-section spaced-section">
+                                    <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-main-page.css?v=84867745912520153" media="all" onload="this.media='all'" />
+                                    <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rte.css?v=8404376346561933237" media="all" onload="this.media='all'" />
+
+                                    <noscript><link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-main-page.css?v=84867745912520153" rel="stylesheet" type="text/css" media="all" /></noscript>
+                                    <noscript><link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rte.css?v=8404376346561933237" rel="stylesheet" type="text/css" media="all" /></noscript>
+
+                                    <div class="page-width page-width--narrow">
+                                    <h1 class="main-page-title page-title h0">
+                                        花藝工作坊 | 插花班 | 特色花材 | Floral Design Workshop
+                                    </h1>
+                                    <div class="rte">
+                                        <meta charset="utf-8" />
+                                        <meta charset="utf-8" />
+                                    <p class="LC20lb DKV0Md">【花藝工作坊】花藝工作坊 | 插花班 | 特色花材 | Floral Design Workshop</p>
+                                    想學&#160;<strong>花藝&#160;</strong>？我們的&#160;<strong>插花班&#160;</strong>會分享不同 插花技巧 ,各種特色 <strong>花材</strong><span><strong>推薦</strong>&#160;</span>,<strong>送花&#160;</strong>選擇。<br />內容包括:&#160;<strong>婚禮花球設計、各種歐洲花式設計、韓式花藝、花束及花禮品包裝設計</strong><br /><strong>、零基礎插花班等。</strong>透過課堂學習提升花藝認識，並懂得<span>自行到&#160;<strong>花墟&#160;</strong>買花，及自行決定</span>於不同紀念 <strong>節日送花</strong>&#160;，<span>花材配搭等技巧</span>。<span class="s1"><span class="Apple-converted-space">&#160;</span></span>
+                                    <p class="p2"><span class="s1"><span class="Apple-converted-space">&#160;</span></span></p>
+                                    </div>
+                                    </div>
+                                </section>
+                                <div id="shopify-section-template--15058976866489__1640076085b29b86ef" class="shopify-section spaced-section spaced-section--full-width">
+                                    <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-image-with-text.css?v=9385084199733401894" rel="stylesheet" type="text/css" media="all" />
+                                    <div class="image-with-text page-width color-scheme-accent-1">
+                                    <div class="image-with-text__grid color-accent-1 grid grid--gapless grid--1-col grid--2-col-tablet gradient">
+                                        <div class="grid__item">
+                                        <div class="image-with-text__media image-with-text__media--adapt media" style="padding-bottom: 100.0%;">
+                                        <img src="/theme_garden/static/src/images/workshop/workshop.png" sizes="(min-width: 1600px) 750px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" alt="" loading="lazy" width="2160" height="2160" /></div>
+                                        </div>
+                                        <div class="grid__item">
+                                        <div class="image-with-text__content image-with-text__content--adapt"><h2 class="image-with-text__heading h1">
+                                                    蝴蝶蘭栽培工作坊
+                                                </h2><div class="image-with-text__text rte"><p>日期：2022年1月15 / 22 / 29日 (星期六) - 任選一天<br />時間：2:00pm<br />時數：1.5小時<br />人數：最多4人<br />對象：18歲或以上<br />費用：每人$300/堂 (需預先繳交)<br />蘭花：每菖$180 (工作坊當天選購)</p></div><a href="https://bit.ly/3Ea8fkc" class="button button--primary">
+                                                    報名及詳情
+                                                    </a></div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <!--from guest-->
+                                <t t-call="theme_garden.guest_list" />
+
+                                <!-- Blog list sections -->
+                                <t t-call="theme_garden.blog_featured" />
+
+                         </main>
+                        </div>
+                    </t>
+                </t>
+            </field>
+        </record>
+
+        <record id="workshop_garden_page" model="website.page">
+            <field name="url">/workshop</field>
+            <field name="is_published">True</field>
+            <field name="view_id" ref="workshop_garden"/>
+            <field name="track">True</field>
+        </record>
+
+        <record id="menu_workshop_garden" model="website.menu">
+            <field name="name">Workshop</field>
+            <field name="url">/workshop</field>
+            <field name="page_id" ref="theme_garden.workshop_garden_page"/>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">5</field>
+        </record>
+    </data>
+</odoo>
