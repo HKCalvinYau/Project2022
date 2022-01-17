@@ -19,7 +19,6 @@
                 'views/workshop.xml',
                 'views/contact.xml',
                 ],
-                
     'category': 'Theme/Creative',
-    'depends': ['website'],
+    'depends': ['website','website_sale'],
 }
