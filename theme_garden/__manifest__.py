@@ -17,7 +17,7 @@
                 'views/media_coverage.xml',
                 'views/workshop.xml',
                 'views/contact.xml',
-    		    'views/assets.xml',
+    		    #'views/assets.xml',
                 ],
     'category': 'Theme/Creative',
     'depends': ['website','website_sale'],
