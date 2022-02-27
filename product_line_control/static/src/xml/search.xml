@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- Products Search Bar autocomplete item -->
+    <div t-name="product_line_control.productsSearchBar.autocomplete" class="dropdown-menu show w-100">
+        <div id="predictive-search-results" _msthidden="1">
+            <t t-if="!products.length">
+                <h2 id="predictive-search-products" class="predictive-search__heading">
+                    <font _mstmutation="1" _msthash="679254" _msttexthash="120744">search results found. Please try another search.</font>
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66">
+                        <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30" />
+                    </svg>
+                </h2>
+            </t>
+            <t t-else="">
+                <h2 id="predictive-search-products" class="predictive-search__heading">
+                        <font _mstmutation="1" _msthash="679254" _msttexthash="120744">products</font>
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66">
+                            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30" />
+                </svg>
+                </h2>
+                <ul id="predictive-search-results-list" class="predictive-search__results-list list-unstyled" role="listbox" aria-labelledby="predictive-search-products">
+                    <t t-foreach="products" t-as="product">
+                        <li id="predictive-search-option-1" class="predictive-search__list-item" role="option" aria-selected="false" style="margin-bottom:-10px">
+                            <a t-att-href="product['website_url']" class="predictive-search__item predictive-search__item--link link link--text" tabindex="-1">
+                                <t t-if="widget.displayImage">
+                                    <img class="predictive-search__image" t-attf-src="/web/image/product.template/#{product['id']}/image_128" style="margin-right:20px" width="50" height="50.0" _mstalt="395577" />
+                                </t>
+
+                                <div class="predictive-search__item-content" style="display: inherit;">
+                                <h3 class="predictive-search__item-heading h5" t-esc="product['name']" />
+                                    <div t-if="widget.displayPrice" class="price">
+                                        <dl>
+                                            <div class="price__regular">
+                                                <dt>
+                                                <span class="visually-hidden visually-hidden--inline">pricing</span>
+                                                </dt>
+                                                <dd class="price__last">
+                                                <t t-if="product['has_discounted_price']">
+                                                    <span class="text-danger text-nowrap" style="text-decoration: line-through;">
+                                                        <t t-raw="product['list_price']"/>
+                                                    </span>
+                                                    <br/>
+                                                </t>
+                                                <span class="price-item price-item--regular"><t t-raw="product['price']"/></span>
+                                                </dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        </t>
+                        <t t-if="hasMoreProducts">
+                            <li id="predictive-search-option-search-keywords" class="predictive-search__list-item" role="option">
+                                <button class="predictive-search__item predictive-search__item--term link link--text h5 animate-arrow" type="submit" tabindex="-1">
+                                    <font _mstmutation="1" _msthash="1995975" _msttexthash="285727"> All results </font>
+                                    <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
+                                         <i class="material-icons" style="font-size:12px;">east</i>
+                                    </svg>
+                                </button>
+                            </li>
+                        </t>
+                        
+                </ul>
+            </t>
+
+        </div>
+</div>
+</templates>
+
+
+

@@ -1,36 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <template id="submenu" name="Theme Garden Submenu">
         <t t-set="has_visible_submenu" t-value="(submenu.is_mega_menu and submenu.is_visible) or submenu.child_id.filtered(lambda menu: menu.is_visible)"/>
-        <li t-if="submenu.is_visible and not has_visible_submenu">
+        <t t-if="submenu.is_store">
+            <li t-if="submenu.get_menu_categories()" t-attf-class="dropdown #{
+                (submenu.clean_url() and submenu.clean_url() != '/' and any(request.httprequest.path == child.url for child in submenu.child_id if child.url) or
+                (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'
+                } #{submenu.is_mega_menu and 'position-static'}">
+                <a t-attf-class="#{link_class or ''} dropdown-toggle header__menu-item list-menu__item link focus-inset" data-toggle="dropdown" href="#">
+                    <span t-field="submenu.name"/>
+                </a>
+                <ul class="dropdown-menu header__submenu list-menu list-menu--disclosure caption-large motion-reduce" role="menu">
+                    <li>
+                        <a href="/shop"
+                            t-attf-class="header__menu-item header__menu-item list-menu__item link link--text focus-inset"
+                            role="menuitem"
+                            t-ignore="true">
+                            <span t-attf-class="#{'header__active-menu-item' if unslug_url(request.httprequest.path) == unslug_url('/shop') else ''}" >Shop ALL </span>
+                        </a>
+                    </li>
+                    <t t-foreach="submenu.get_menu_categories()" t-as="category">
+                        <li>
+                            <a t-att-href="category.get_category_url()"
+                                t-attf-class="header__menu-item header__menu-item list-menu__item link link--text focus-inset"
+                                role="menuitem"
+                                t-ignore="true">
+                                <span t-attf-class="#{'header__active-menu-item' if category.get_category_url() and unslug_url(request.httprequest.path) == unslug_url(category.get_category_url()) else ''}" t-field="category.name"/>
+                            </a>
+                        </li>
+                    </t>
+                </ul>
+            </li>
+        </t>
+        <t t-else="">
+            <li t-if="submenu.is_visible and not has_visible_submenu and submenu.footer_control not in ['only_footer', 't_c_footer']">
+                <a t-att-href="submenu.clean_url()"
+                    t-attf-class="header__menu-item header__menu-item list-menu__item link link--text focus-inset"
+                    role="menuitem"
+                    t-ignore="true"
+                    t-att-target="'_blank' if submenu.new_window else None">
+                    <span t-attf-class="#{'header__active-menu-item' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else ''}" t-field="submenu.name"/>
+                </a>
+            </li>
+
+            <li t-if="has_visible_submenu" t-attf-class="dropdown #{
+                (submenu.clean_url() and submenu.clean_url() != '/' and any(request.httprequest.path == child.url for child in submenu.child_id if child.url) or
+                (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'
+                } #{submenu.is_mega_menu and 'position-static'}">
+                <a t-attf-class="#{link_class or ''} dropdown-toggle header__menu-item list-menu__item link focus-inset #{submenu.is_mega_menu and 'o_mega_menu_toggle'}" data-toggle="dropdown" href="#">
+                    <span t-field="submenu.name"/>
+                </a>
+                <div t-if="submenu.is_mega_menu"
+                        t-attf-class="dropdown-menu o_mega_menu #{submenu.mega_menu_classes} header__menu-item list-menu__item link focus-inset"
+                        data-name="Mega Menu"
+                        t-field="submenu.mega_menu_content"/>
+                <ul t-else="" class="dropdown-menu header__submenu list-menu list-menu--disclosure caption-large motion-reduce" role="menu">
+                    <t t-foreach="submenu.child_id" t-as="submenu">
+                        <t t-call="theme_garden.submenu">
+                            <t t-set="item_class" t-value="None"/>
+                            <t t-set="link_class" t-value="'dropdown-item'"/>
+                        </t>
+                    </t>
+                </ul>
+            </li>
+        </t>
+    </template>
+
+
+
+    <template id="submenu_mobile" name="Theme Garden Submenu">
+        <t t-set="has_visible_submenu" t-value="(submenu.is_mega_menu and submenu.is_visible) or submenu.child_id.filtered(lambda menu: menu.is_visible)"/>
+        <t t-if="submenu.is_store">
+            <li t-attf-class="dropdown #{
+                (submenu.clean_url() and submenu.clean_url() != '/' and any(request.httprequest.path == child.url for child in submenu.child_id if child.url) or
+                (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'
+                } #{submenu.is_mega_menu and 'position-static'}">
+                <a t-attf-class="menu-drawer__menu-item list-menu__item link link--text focus-inset menu-drawer__menu-item #{link_class or ''} dropdown-toggle header__menu-item list-menu__item link focus-inset #{submenu.is_mega_menu and 'o_mega_menu_toggle'}" data-toggle="dropdown" href="#">
+                    <span t-field="submenu.name"/>
+                </a>
+
+                <ul class="dropdown-menu header__submenu list-menu list-menu--disclosure caption-large motion-reduce" role="menu">
+                    <t t-foreach="submenu.get_menu_categories()" t-as="category">
+                       <li>
+                            <a t-att-href="category.get_category_url()"
+                                t-attf-class="menu-drawer__menu-item list-menu__item link link--text focus-inset menu-drawer__menu-item#{'--active' if unslug_url(request.httprequest.path) == unslug_url(category.get_category_url()) else ''}"
+                                role="menuitem"
+                                t-ignore="true"
+                               >
+                                <span t-attf-class="#{'header__active-menu-item' if unslug_url(request.httprequest.path) == unslug_url(category.get_category_url()) else ''}" t-field="category.name"/>
+                            </a>
+                        </li>
+                    </t>
+                </ul>
+            </li>
+        </t>
+        <t t-else="">
+            <li t-if="submenu.is_visible and not has_visible_submenu and  submenu.footer_control not in ['only_footer', 't_c_footer']">
+                <a t-att-href="submenu.clean_url()"
+                    t-attf-class="menu-drawer__menu-item list-menu__item link link--text focus-inset menu-drawer__menu-item#{'--active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else ''}"
+                    role="menuitem"
+                    t-ignore="true"
+                    t-att-target="'_blank' if submenu.new_window else None">
+                    <span t-attf-class="#{'header__active-menu-item' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else ''}" t-field="submenu.name"/>
+                </a>
+            </li>
+
+            <li t-if="has_visible_submenu" t-attf-class="dropdown #{
+                (submenu.clean_url() and submenu.clean_url() != '/' and any(request.httprequest.path == child.url for child in submenu.child_id if child.url) or
+                (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'
+                } #{submenu.is_mega_menu and 'position-static'}">
+                <a t-attf-class="menu-drawer__menu-item list-menu__item link link--text focus-inset menu-drawer__menu-item #{link_class or ''} dropdown-toggle header__menu-item list-menu__item link focus-inset #{submenu.is_mega_menu and 'o_mega_menu_toggle'}" data-toggle="dropdown" href="#">
+                    <span t-field="submenu.name"/>
+                </a>
+                <div t-if="submenu.is_mega_menu"
+                        t-attf-class="dropdown-menu o_mega_menu #{submenu.mega_menu_classes} header__menu-item list-menu__item link focus-inset"
+                        data-name="Mega Menu"
+                        t-field="submenu.mega_menu_content"/>
+                <ul t-else="" class="dropdown-menu header__submenu list-menu list-menu--disclosure caption-large motion-reduce" role="menu">
+                    <t t-foreach="submenu.child_id" t-as="submenu">
+                        <t t-call="theme_garden.submenu_mobile">
+                            <t t-set="item_class" t-value="None"/>
+                            <t t-set="link_class" t-value="'dropdown-item'"/>
+                        </t>
+                    </t>
+                </ul>
+            </li>
+        </t>
+    </template>
+
+    <template id="submenu_footer" name="Theme Garden Submenu Foote ">
+        <t t-set="has_visible_submenu" t-value="(submenu.is_mega_menu and submenu.is_visible) or submenu.child_id.filtered(lambda menu: menu.is_visible)"/>
+        <li t-if="submenu.is_visible and submenu.footer_control not in ['t_c_footer','t_c_header_footer']">
             <a t-att-href="submenu.clean_url()"
-                t-attf-class="header__menu-item header__menu-item list-menu__item link link--text focus-inset"
+                t-attf-class="link link--text list-menu__item list-menu__item--link list-menu__item--#{'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else ''}"
                 role="menuitem"
                 t-ignore="true"
                 t-att-target="'_blank' if submenu.new_window else None">
-                <span t-attf-class="#{'header__active-menu-item' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else ''}" t-field="submenu.name"/>
-            </a>
-        </li>
-
-        <li t-if="has_visible_submenu" t-attf-class="dropdown #{
-            (submenu.clean_url() and submenu.clean_url() != '/' and any(request.httprequest.path == child.url for child in submenu.child_id if child.url) or
-            (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'
-            } #{submenu.is_mega_menu and 'position-static'}">
-            <a t-attf-class="#{link_class or ''} dropdown-toggle header__menu-item list-menu__item link focus-inset #{submenu.is_mega_menu and 'o_mega_menu_toggle'}" data-toggle="dropdown" href="#">
                 <span t-field="submenu.name"/>
             </a>
-            <div t-if="submenu.is_mega_menu"
-                    t-attf-class="dropdown-menu o_mega_menu #{submenu.mega_menu_classes} header__menu-item list-menu__item link focus-inset"
-                    data-name="Mega Menu"
-                    t-field="submenu.mega_menu_content"/>
-            <ul t-else="" class="dropdown-menu header__submenu list-menu list-menu--disclosure caption-large motion-reduce" role="menu">
-                <t t-foreach="submenu.child_id" t-as="submenu">
-                    <t t-call="theme_garden.submenu">
-                        <t t-set="item_class" t-value="None"/>
-                        <t t-set="link_class" t-value="'dropdown-item'"/>
-                    </t>
-                </t>
-            </ul>
         </li>
     </template>
+
+     <template id="submenu_footer_terms" name="Theme Garden Submenu Foote ">
+        <li t-if="submenu.footer_control in ['t_c_footer','t_c_header_footer']">
+            <a t-att-href="submenu.clean_url()"
+                t-attf-class="link link--text list-menu__item list-menu__item--link list-menu__item--#{'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else ''}"
+                role="menuitem"
+                t-ignore="true"
+                t-att-target="'_blank' if submenu.new_window else None">
+                <span t-field="submenu.name"/>
+            </a>
+        </li>
+    </template>
+
 </odoo>

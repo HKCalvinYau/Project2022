@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="login" inherit_id="web.login" >
+        <xpath expr="//form" position="replace">
+            <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+            <link rel="stylesheet" href="/theme_garden/static/src/css/customer.css" type="text/css" media="all"/> 
+            <div class="customer login">
+            <!-- 
+                <h1 id="recover" tabindex="-1">Reset your password</h1>
+                <div>
+                    <p>We will send you an email to reset your password</p>
+                    <form method="post" action="/account/recover" accept-charset="UTF-8">
+                        <input type="hidden" name="form_type" value="recover_customer_password" />
+                        <input type="hidden" name="utf8" value="✓" />
+                        <div class="field">
+                        <input type="email" value="" name="email" id="RecoverEmail" autocorrect="off" autocapitalize="off" autocomplete="email" placeholder="Email" />
+                        <label for="RecoverEmail">Email</label>
+                        </div>
+                        <button>Submit</button>
+                        <a href="#login">Cancel</a>
+                    </form>
+                </div>
+                -->
+
+                <h1 id="login" tabindex="-1">Login</h1>
+                <div>
+                    <form method="post" role="form" t-attf-action="/web/login" onsubmit="this.action = '/web/login' + location.hash">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                        <div class="form-group field-db" t-if="databases and len(databases) &gt; 1">
+                            <label for="db" class="col-form-label">Database</label>
+                            <div t-attf-class="input-group {{'input-group-sm' if form_small else ''}}">
+                                <input type="text" name="db" t-att-value="request.db" id="db" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" readonly="readonly"/>
+                                <span class="input-group-append">
+                                    <a role="button" href="/web/database/selector" class="btn btn-secondary">Select <i class="fa fa-database" role="img" aria-label="Database" title="Database"></i></a>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="field">
+                            <input type="text" name="login" t-att-value="login" id="login" autocomplete="email" autocorrect="off" autocapitalize="off" placeholder="Email" />
+                            <label for="login">Email</label>
+                        </div>
+                        <div class="field">
+                            <input type="password" name="password" id="password" autocomplete="current-password" placeholder="Password" />
+                            <label for="password">Password</label>
+                        </div>
+
+                        <a t-attf-href="/web/reset_password?{{ keep_query() }}">Forgot your password?</a>
+                        
+                        <p class="alert alert-danger" t-if="error" role="alert">
+                            <t t-esc="error"/>
+                        </p>
+                        <p class="alert alert-success" t-if="message" role="status">
+                            <t t-esc="message"/>
+                        </p>
+                        <div class="oe_login_buttons">
+                            <button type="submit">Login</button>
+                            <t t-if="debug">
+                                <button type="submit" name="redirect" value="/web/become" class="btn btn-link btn-sm btn-block">Log in as superuser</button>
+                            </t>
+                            <div class="o_login_auth"/>
+                        </div>
+                        
+                         <div>
+                            <a t-attf-href="/web/signup?{{ keep_query() }}">Create Account </a>
+                            
+                        </div>
+                        <!-- 
+                        <a href="/account/register">Create account</a> -->
+                        <input type="hidden" name="redirect" t-att-value="redirect"/>
+                    </form>
+                </div>
+
+            </div>
+            </main>
+        </xpath>
+    </template>
+</odoo>

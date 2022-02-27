@@ -58,6 +58,7 @@
         <record id="menu_delivery_garden" model="website.menu">
             <field name="name">Delivery Info</field>
             <field name="url">/delivery-info</field>
+            <field name="footer_control">t_c_header_footer</field>
             <field name="page_id" ref="theme_garden.delivery_garden_page"/>
             <field name="parent_id" ref="website.main_menu"/>
             <field name="sequence" type="int">4</field>

@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+    
+    <!-- (Option) Blog: Show Blog Post in Shopify style
+
+    to inherit: 
+    -->
+    <template id="opt_blog_shopify_view" name="Shopify Blogpost View" inherit_id="website_blog.blog_post_short" active="True" customize_show="True"/>
+
+    <template id="blogpost_loop_custom" inherit_id="website_blog.posts_loop">
+        <xpath expr="//div[@id='o_wblog_posts_loop']/div[2]" position="replace">
+            <t t-set="is_shopify_view" t-value="is_view_active('theme_garden.opt_blog_shopify_view')"/>
+            <t t-if="is_shopify_view">
+                
+                <div t-attf-class="row #{posts and not opt_blog_readable and 'mx-n2'}">
+                    <!-- Filters -->
+                    <div t-if="tag or date_begin or search" class="col-12 mb-3">
+                        <div t-if="posts" class="h4 mb-3">
+                            <t t-esc="len(posts)"/>
+                            <t t-if="len(posts) &lt; 2">Article</t>
+                            <t t-else="">Articles</t>
+                        </div>
+                        <span t-if="search" class="align-items-baseline border d-inline-flex pl-2 rounded mb-2">
+                            <i class="fa fa-search mr-2 text-muted"/>
+                            <t t-esc="search"/>
+                            <a t-att-href="blog_url(search=False, tag=tag)" class="btn border-0 py-1 post_link">&#215;</a>
+                        </span>
+                        <t t-if="tag">
+                            <!-- Show active tags with a category set -->
+                            <t t-foreach="tag_category" t-as="nav_tag_category">
+                                <t t-call="website_blog.tags_list">
+                                    <t t-set='tags' t-value='nav_tag_category.tag_ids' />
+                                    <t t-set='dismissibleBtn' t-value="True"/>
+                                </t>
+                            </t>
+
+                            <!-- Show active tags without a category set -->
+                            <t t-call="website_blog.tags_list">
+                                <t t-set='tags' t-value='other_tags'/>
+                                <t t-set='dismissibleBtn' t-value="True"/>
+                            </t>
+                        </t>
+                        <span t-if="date_begin" class="align-items-baseline border d-inline-flex pl-2 rounded mb-2">
+                            <i class="fa fa-calendar-o mr-2 text-muted"/>
+                            <t t-esc="date_begin" t-options="{'widget': 'date', 'format': 'MMM yyyy'}"></t>
+                            <a t-attf-href="#{blog_url(date_begin=False, date_end=False)}" class="btn border-0 py-1">&#215;</a>
+                        </span>
+                        <hr class="mt-2"/>
+                    </div>
+
+                    <!-- No blog post yet -->
+                    <div t-if="not posts" class="col">
+                        <t t-set="no_results_str">No results for "%s".</t>
+                        <h2 t-if="search" t-esc="no_results_str % search" class="font-weight-bold"/>
+                        <h2 t-else="">No blog post yet.</h2>
+                        <div class="alert alert-info" groups="website.group_website_designer">
+                            Click on "<b>New</b>" in the top-right corner to write your first blog post.
+                        </div>
+                    </div>
+                </div>
+
+                
+                <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-article-card.css?v=13280276571795379847" rel="stylesheet" type="text/css" media="all" />
+                <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-card.css?v=9252431989618201249" rel="stylesheet" type="text/css" media="all" />
+                <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-main-blog.css?v=13273422910679260180" rel="stylesheet" type="text/css" media="all" />
+                
+                
+                <div class="blog-articles">
+                        <t t-foreach="posts" t-as="blog_post">
+                            <div class="blog-articles__article article">
+                                <article class="article-card" aria-labelledby="Article-557937721529">
+                                    <a t-attf-href="/blog/#{slug(blog_post.blog_id)}/#{slug(blog_post)}" class="article-content motion-reduce" style="text-decoration: none;">
+                                        <div class="article-card__image-wrapper">
+                                        <div class="article-card__image media media--landscape">
+                                            <t t-set="_cp" t-value="_cp or json.loads(blog_post.cover_properties)"/>
+                                            <t t-if="_cp.get('background-image')">
+                                                <t t-set="image_url" t-value="_cp.get('background-image').replace('url', '').replace('(','').replace(')','')" />
+                                            </t>
+                                            <t t-else="">
+                                                 <t t-set="image_url" t-value="_cp.get('background-image')" />
+                                            </t>
+
+                                            <img t-attf-src="#{image_url}" sizes="(min-width: 1600px) 750px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" alt="情人節玫瑰" width="2160" height="2160" loading="lazy" class="motion-reduce" />
+                                        </div>
+                                        </div>
+                                        <div class="article-card__info">
+                                        <header class="article-card__header">
+                                            <h2 class="article-card__title" id="Article-557937721529"><t t-esc="blog_post.name or 'Untitled Post'" /></h2>
+                                            <span class="circle-divider caption-with-letter-spacing">
+                                                <!--<time datetime="2022-02-11T10:28:17Z">February 2022</time> -->
+                                                <time t-field="blog_post.post_date"  t-options='{"format": "MMM d, yyyy"}'/>
+                                            </span>
+                                        </header>
+                                        <p class="article-card__excerpt rte-width"><t t-esc="blog_post.teaser" /> more</p>
+                                        <div class="article-card__footer" />
+                                        <!-- 
+                                        <span t-if="not blog_post.website_published" class="bg-danger small py-1 px-2 position-absolute o_not_editable" style="top:0; right:0">unpublished</span>
+                                        -->
+                                       </div>
+                                    </a>
+                                </article>
+                            </div>
+                        </t>
+                </div>
+                
+            </t>
+            <t t-else="">
+                <div t-attf-class="row #{posts and not opt_blog_readable and 'mx-n2'}">
+                    <!-- Filters -->
+                    <div t-if="tag or date_begin or search" class="col-12 mb-3">
+                        <div t-if="posts" class="h4 mb-3">
+                            <t t-esc="len(posts)"/>
+                            <t t-if="len(posts) &lt; 2">Article</t>
+                            <t t-else="">Articles</t>
+                        </div>
+                        <span t-if="search" class="align-items-baseline border d-inline-flex pl-2 rounded mb-2">
+                            <i class="fa fa-search mr-2 text-muted"/>
+                            <t t-esc="search"/>
+                            <a t-att-href="blog_url(search=False, tag=tag)" class="btn border-0 py-1 post_link">&#215;</a>
+                        </span>
+                        <t t-if="tag">
+                            <!-- Show active tags with a category set -->
+                            <t t-foreach="tag_category" t-as="nav_tag_category">
+                                <t t-call="website_blog.tags_list">
+                                    <t t-set='tags' t-value='nav_tag_category.tag_ids' />
+                                    <t t-set='dismissibleBtn' t-value="True"/>
+                                </t>
+                            </t>
+
+                            <!-- Show active tags without a category set -->
+                            <t t-call="website_blog.tags_list">
+                                <t t-set='tags' t-value='other_tags'/>
+                                <t t-set='dismissibleBtn' t-value="True"/>
+                            </t>
+                        </t>
+                        <span t-if="date_begin" class="align-items-baseline border d-inline-flex pl-2 rounded mb-2">
+                            <i class="fa fa-calendar-o mr-2 text-muted"/>
+                            <t t-esc="date_begin" t-options="{'widget': 'date', 'format': 'MMM yyyy'}"></t>
+                            <a t-attf-href="#{blog_url(date_begin=False, date_end=False)}" class="btn border-0 py-1">&#215;</a>
+                        </span>
+                        <hr class="mt-2"/>
+                    </div>
+
+                    <!-- No blog post yet -->
+                    <div t-if="not posts" class="col">
+                        <t t-set="no_results_str">No results for "%s".</t>
+                        <h2 t-if="search" t-esc="no_results_str % search" class="font-weight-bold"/>
+                        <h2 t-else="">No blog post yet.</h2>
+                        <div class="alert alert-info" groups="website.group_website_designer">
+                            Click on "<b>New</b>" in the top-right corner to write your first blog post.
+                        </div>
+                    </div>
+
+                    <!-- Posts -->
+
+                    <!-- Define 'colWidth' qWeb variable, to be assigned later.
+                    Adjust accordingly if sidebar and/or readability modes are active. -->
+                    <t t-if="not opt_blog_list_view">
+                        <t t-if="opt_blog_readable">
+                            <t t-if="opt_blog_sidebar_show" t-set="colWidth" t-value="'col-md-6'"/>
+                            <t t-else="" t-set="colWidth" t-value="'col-md-6 col-xl-4'"/>
+                        </t>
+                        <t t-else="">
+                            <t t-if="opt_blog_sidebar_show" t-set="colWidth" t-value="'px-2 col-md-6 col-xl-4'"/>
+                            <t t-else="" t-set="colWidth" t-value="'px-2 col-sm-6 col-lg-4 col-xl-3'"/>
+                        </t>
+                    </t>
+                    <!-- Loop through posts: exclude the first one if already displayed as top banner -->
+                    <t t-foreach="posts" t-as="blog_post">
+                        <!-- Assign 'colWidth': 'col-12' is default for List-View and mobile -->
+                        <div t-attf-class="pb-4 col-12 #{colWidth}">
+                            <article t-attf-class="o_wblog_post position-relative #{'card h-100' if opt_blog_cards_design else ''}" name="blog_post">
+                                <!-- List-View Design -->
+                                <t t-if="opt_blog_list_view">
+                                    <div t-att-class="opt_blog_cards_design and 'card-body py-3'">
+                                        <t t-call="website_blog.post_heading"/>
+                                    </div>
+                                    <div t-if="not opt_blog_cards_design" class="py-2">
+                                        <t t-call="website_blog.post_info"></t>
+                                    </div>
+                                    <div t-if="opt_posts_loop_show_cover">
+                                        <t t-call="website_blog.post_cover_image"/>
+                                    </div>
+                                    <div t-if="is_view_active('website_blog.opt_posts_loop_show_teaser')" t-att-class="opt_blog_cards_design and 'card-body pt-0'">
+                                        <t t-call="website_blog.post_teaser"/>
+                                    </div>
+                                    <div t-if="opt_blog_cards_design" t-attf-class="opt_blog_cards_design and 'card-body pt-0 pb-2'}">
+                                        <t t-call="website_blog.post_info"></t>
+                                    </div>
+                                    <div t-else="" class="mt-3">
+                                        <a t-attf-href="/blog/#{slug(blog_post.blog_id)}/#{slug(blog_post)}" class="btn btn-primary">
+                                            Read more <i class="fa fa-chevron-right ml-2"/>
+                                        </a>
+                                    </div>
+                                </t>
+                                <!-- Grid-View Design -->
+                                <t t-if="not opt_blog_list_view">
+                                    <t t-if="opt_posts_loop_show_cover" t-call="website_blog.post_cover_image"/>
+                                    <div t-att-class="opt_blog_cards_design and 'card-body px-2 py-0 mb-2'">
+                                        <t t-call="website_blog.post_heading"/>
+                                        <div t-if="is_view_active('website_blog.opt_posts_loop_show_teaser')">
+                                            <t t-call="website_blog.post_teaser"/>
+                                        </div>
+                                    </div>
+                                    <div t-attf-class="o_wblog_normalize_font #{'card-footer px-2 pb-2' if opt_blog_cards_design else 'pr-2 pb-2'}">
+                                        <t t-call="website_blog.post_info"></t>
+                                    </div>
+                                </t>
+                                <!-- Add 'unpublished' badge -->
+                                <span t-if="not blog_post.website_published" class="bg-danger small py-1 px-2 position-absolute o_not_editable" style="top:0; right:0">unpublished</span>
+                            </article>
+                        </div>
+                        <!-- List-View Design, add <hr> after post -->
+                        <div t-if="opt_blog_list_view and not blog_post_last" class="col-12 mt-2 mb-5 px-2"><hr/></div>
+                    </t>
+                </div>
+            </t>
+
+        </xpath>
+    </template>
+
+    <template id="blog_header" inherit_id="website_blog.blog_post_short">
+        <xpath expr="//div[@id='o_wblog_blog_top']" position="replace">
+
+        <div id="o_wblog_blog_top">
+            <t t-if="not tag and not date_begin">
+            <div id="o_wblog_blog_top_droppable">
+                        <t t-if="blog">
+                            <t t-set="oe_structure_blog_single_header_description">Edit the '<t t-esc="blog.name"/>' page header.</t>
+                            <div class="container">
+                                <div class="row py-4">
+                                    <div class="col-md-6">
+                                        <div class="container position-relative h-100 d-flex flex-column justify-content-around pt-1 pb-2">
+                                            <div class="o_wblog_post_title  ">
+                                                <span t-field="blog.name" class="h1 d-block" data-oe-expression="blog.name" t-att-data-blog-id="blog.id" placeholder="Blog Post Title"/>
+                                                <div t-field="blog.subtitle" class="h4" placeholder="Subtitle"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- 
+                            <div id="title" class="blog_header" t-ignore="True">
+                                <div class="container text-center position-relative h-100 d-flex flex-column flex-grow-1 justify-content-around">
+                                    <div t-attf-class="o_wblog_post_title #{opt_blog_post_select_to_tweet and 'js_tweet'} #{opt_blog_post_select_to_comment and 'js_comment'}">
+                                        <span t-field="blog.name" class="h1 d-block" data-oe-expression="blog.name" t-att-data-blog-id="blog.id" placeholder="Blog Post Title"/>
+                                        <div t-field="blog.subtitle" class="h4" placeholder="Subtitle"/>
+                                    </div>
+                            </div>
+                            </div>
+                            -->
+                        
+                        </t>
+                        <t t-elif="blogs">
+                            <t t-set="oe_structure_blog_all_header_description">Edit the 'All Blogs' page header.</t>
+                            <div class="oe_structure"
+                                id="oe_structure_blog_all_header"
+                                t-att-data-editor-sub-message="oe_structure_blog_all_header_description"/>
+                        </t>
+            </div>
+            </t>
+            <t t-else="">
+                
+                <t t-set="oe_structure_blog_filtered_header_description">Edit the 'Filter Results' page header.</t>
+                <div class="oe_structure"
+                    id="oe_structure_blog_filtered_header"
+                    t-att-data-editor-sub-message="oe_structure_blog_filtered_header_description"/>
+            </t>
+        </div>
+
+        
+        
+            
+        </xpath>
+    </template>
+    
+
+    <template id="blog_featured" name="Theme Garden Blog home posts">
+        <section id="shopify-section-template--15283155665081__1633488323d23b8265" class="shopify-section spaced-section spaced-section--full-width">
+            <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-slider.css?v=8200683548770782072" media="all" onload="this.media='all'" />
+            <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-card.css?v=9252431989618201249" media="all" onload="this.media='all'" />
+            <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-article-card.css?v=13280276571795379847" media="all" onload="this.media='all'" />
+            <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-featured-blog.css?v=13863197538545919654" media="all" onload="this.media='all'" />
+
+            <noscript>
+                <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-slider.css?v=8200683548770782072" rel="stylesheet" type="text/css" media="all" /></noscript>
+            <noscript>
+                <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-card.css?v=9252431989618201249" rel="stylesheet" type="text/css" media="all" /></noscript>
+            <noscript>
+                <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-article-card.css?v=13280276571795379847" rel="stylesheet" type="text/css" media="all" /></noscript>
+
+            <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-featured-blog.css?v=13863197538545919654" rel="stylesheet" type="text/css" media="all" />
+            <t t-set="blog_post_ids" t-value="request.env['blog.post'].search([], limit=3, order='is_published desc, post_date desc, id asc')" />
+            <div class="blog">
+            <div class="page-width-desktop">
+                <div class="title-wrapper-with-link title-wrapper--self-padded-tablet-down">
+                <h2 class="blog__title">Blog posts</h2><a href="/blogs/our-blog" class="link underlined-link large-up-hide">
+                    View all
+                    </a></div><slider-component class="slider-mobile-gutter">
+
+            <ul id="Slider-template--15283155665081__1633488323d23b8265" class="blog__posts articles-wrapper grid grid--peek grid--2-col-tablet grid--3-col-desktop slider slider--tablet blog__posts--3-items" role="list">
+                <t t-foreach="blog_post_ids" t-as="blog_post">
+                    <li class="blog__post grid__item article slider__slide slider__slide--full-width">
+                            <article class="article-card" aria-labelledby="Article-557656932537">
+                            <a t-attf-href="/blog/#{slug(blog_post.blog_id)}/#{slug(blog_post)}" class="article-content motion-reduce" style="text-decoration: none;">
+                            <div class="article-card__image-wrapper">
+                                    <div class="article-card__image media media--landscape">
+                                    <t t-set="_cp" t-value="_cp or json.loads(blog_post.cover_properties)"/>
+                                    <!-- Use Conditions to avoid errors -->
+                                    <t t-if="_cp.get('background-image')">
+                                        <t t-set="image_url" t-value="_cp.get('background-image').replace('url', '').replace('(','').replace(')','')" />
+                                    </t>
+                                    <t t-else="">
+                                        <t t-set="image_url" t-value="_cp.get('background-image')" />
+                                    </t>
+                                    <img t-attf-src="#{image_url}" sizes="(min-width: 1600px) 750px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" alt="Especially for Goodbye Dear" width="2160" height="2160" loading="lazy" class="motion-reduce" />
+                                    </div>
+                                </div><div class="article-card__info">
+                                <header class="article-card__header">
+                                    <h2 class="article-card__title" id="Article-557656932537">
+                                    <t t-esc="blog_post.name or 'Untitled Post'" />
+                                    </h2>
+                                    <span class="circle-divider caption-with-letter-spacing">
+                                        <time t-field="blog_post.post_date"  t-options='{"format": "MMM d, yyyy"}'/>
+                                    </span>
+                                </header>
+                                <p class="article-card__excerpt rte-width"><t t-esc="blog_post.teaser" /> more
+                            </p><div class="article-card__footer"></div>
+                                </div>
+                            </a>
+                            </article>
+                    </li>
+                </t>
+                
+               </ul>
+               
+               <div class="slider-buttons no-js-hidden">
+                        <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="Slide left" disabled="true"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+            </path></svg>
+            </button>
+                        <div class="slider-counter caption">
+                        <span class="slider-counter--current">1</span>
+                        <span aria-hidden="true"> / </span>
+                        <span class="visually-hidden">of</span>
+                        <span class="slider-counter--total">1</span>
+                        </div>
+                        <button type="button" class="slider-button slider-button--next" name="next" aria-label="Slide right" disabled="true"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+            </path></svg>
+            </button>
+                    </div></slider-component><div class="blog__view-all center small-hide medium-hide">
+                    <a href="/blog" class="blog__button button home-link" style="text-decoration: none;">
+                        View all
+                    </a>
+                    </div></div>
+            </div>
+
+
+        </section>
+
+    </template>
+</odoo>

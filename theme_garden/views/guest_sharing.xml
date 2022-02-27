@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+      <record id="garden_guest_form" model="ir.ui.view">
+         <field name="name">guest.sharing.form</field>
+         <field name="model">guest.sharing</field>
+         <field name="arch" type="xml">
+            <form>
+               <sheet>
+                  <group>
+                     <group string="Title">
+                        <h2>
+                           <field name="name" placeholder="週年紀念花束" />
+                        </h2>
+                        <field name="g_image" widget="image" />
+                        <field name="customer" placeholder="Heidi" />
+                     </group>
+                  </group>
+                  <notebook>
+                     <page string="Description">
+                        <field name="description" widget="html" />
+                     </page>
+                  </notebook>
+               </sheet>
+            </form>
+         </field>
+      </record>
+      <record id="garden_guest_tree" model="ir.ui.view">
+         <field name="name">guest.sharing.tree</field>
+         <field name="model">guest.sharing</field>
+         <field name="arch" type="xml">
+            <tree>
+               <field name="name" />
+               <field name="customer" />
+            </tree>
+         </field>
+      </record>
+      <record id="garden_guest_action" model="ir.actions.act_window">
+         <field name="name">Guest Sharing</field>
+         <field name="type">ir.actions.act_window</field>
+         <field name="res_model">guest.sharing</field>
+         <field name="view_mode">tree,form</field>
+      </record>
+      <menuitem id="garden_guest_sharing_menu" name="Guest Sharing" parent="website.menu_website_global_configuration" sequence="15" action="garden_guest_action" />
+      <!-- Web Templates -->
+      <!-- Guest List -->
+      <template id="guest_list" name="Guest Post list ">
+         <section id="shopify-section-template--15058976866489__1633488346ccec34aa" class="shopify-section spaced-section spaced-section--full-width">
+            <link href="/theme_garden/static/src/css/section-multicolumn.css" rel="stylesheet" type="text/css" media="all" />
+            <link rel="stylesheet" href="/theme_garden/static/src/css/component-slider.css" media="all" onload="this.media='all'" />
+            <noscript>
+               <link href="/theme_garden/static/src/css/component-slider.css" rel="stylesheet" type="text/css" media="all" />
+            </noscript>
+            <t t-set="guest_list_sharing_ids" t-value="request.env['guest.sharing'].search([], limit=3)" />
+            <div class="multicolumn background-primary">
+               <div class="page-width">
+                  <div class="title-wrapper-with-link title-wrapper--self-padded-mobile">
+                     <h2 class="title">From our guests</h2>
+                  </div>
+                  <slider-component class="slider-mobile-gutter">
+                     <ul class="multicolumn-list grid grid--1-col grid--3-col-tablet" id="Slider-template--15058976866489__1633488346ccec34aa" role="list">
+                        <t t-foreach="guest_list_sharing_ids" t-as="item">
+                            <li class="multicolumn-list__item grid__item">
+                            <div class="multicolumn-card">
+                                <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--full-width multicolumn-card-spacing">
+                                    <div class="media media--transparent media--adapt" style="padding-bottom: 100.0%;">
+                                        <img t-attf-src="/web/image/guest.sharing/#{item.id}/g_image" sizes="(min-width: 990px) 550px, (min-width: 750px) 550px,calc(100vw - 30px)" alt="" height="1080" width="1080" loading="lazy" />
+                                    </div>
+                                </div>
+                                <div class="multicolumn-card__info">
+                                    <h3><t t-esc="name" /></h3>
+                                    <div class="rte">
+                                         <span t-raw="item.description" />
+                                        <p t-if="item.customer">
+                                            By
+                                            <t t-esc="item.customer" />
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            </li>
+                        </t>
+                     </ul>
+                  </slider-component>
+                  <div class="center">
+                     <a class="button button--primary home-link" style="text-decoration: none;" href="/guest-sharing">View all</a>
+                  </div>
+               </div>
+            </div>
+         </section>
+      </template>
+      <record id="guest_sharing" model="ir.ui.view">
+         <field name="name">Guest Sharing</field>
+         <field name="type">qweb</field>
+         <field name="key">theme_garden.guest_sharing</field>
+         <field name="arch" type="xml">
+            <t name="About" t-name="theme_garden.guest_sharing">
+               <t t-call="website.layout">
+                  <div id="wrap">
+                     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+                        <section id="shopify-section-template--15180479987897__main" class="shopify-section spaced-section">
+                           <link rel="stylesheet" href="/theme_garden/static/src/css/section-main-page.css" media="all" onload="this.media='all'" />
+                           <link rel="stylesheet" href="/theme_garden/static/src/css/component-rte.css" media="all" onload="this.media='all'" />
+                           <noscript>
+                              <link href="/theme_garden/static/src/css/section-main-page.css" rel="stylesheet" type="text/css" media="all" />
+                           </noscript>
+                           <noscript>
+                              <link href="/theme_garden/static/src/css/component-rte.css" rel="stylesheet" type="text/css" media="all" />
+                           </noscript>
+                           <div class="page-width page-width--narrow">
+                              <h1 class="main-page-title page-title h0">Guest Sharing</h1>
+                              <div class="rte">Enjoy with Gardenia Floral Studio!</div>
+                           </div>
+                        </section>
+                        <section id="shopify-section-template--15180479987897__1633488346ccec34aa" class="shopify-section spaced-section spaced-section--full-width">
+                           <link href="/theme_garden/static/src/css/section-multicolumn.css" rel="stylesheet" type="text/css" media="all" />
+                           <link rel="stylesheet" href="/theme_garden/static/src/css/component-slider.css" media="all" onload="this.media='all'" />
+                           <noscript>
+                              <link href="/theme_garden/static/src/css/component-slider.css" rel="stylesheet" type="text/css" media="all" />
+                           </noscript>
+                           <div class="multicolumn background-primary">
+                              <div class="page-width">
+                                 <div class="title-wrapper-with-link title-wrapper--self-padded-mobile">
+                                    <h2 class="title">From our Guests</h2>
+                                 </div>
+                                 <t t-set="guest_sharing_ids" t-value="request.env['guest.sharing'].search([])" />
+                                 <slider-component class="slider-mobile-gutter">
+                                    <ul class="multicolumn-list grid grid--1-col grid--2-col-tablet" id="Slider-template--15180479987897__1633488346ccec34aa" role="list">
+                                       <t t-foreach="guest_sharing_ids" t-as="item">
+                                          <li class="multicolumn-list__item grid__item">
+                                             <div class="multicolumn-card">
+                                                <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--full-width multicolumn-card-spacing">
+                                                   <div class="media media--transparent media--adapt" style="padding-bottom: 100.0%;">
+                                                      <img t-attf-src="/web/image/guest.sharing/#{item.id}/g_image" sizes="(min-width: 990px) 550px,(min-width: 750px) 550px,calc(100vw - 30px)" alt="" height="1620" width="1620" loading="lazy" />
+                                                   </div>
+                                                </div>
+                                                <div class="multicolumn-card__info">
+                                                   <h3>
+                                                      <t t-esc="item.name" />
+                                                   </h3>
+                                                   <div class="rte">
+                                                      <!--  <t t-esc="item.description" /> -->
+                                                      <span t-raw="item.description" />
+                                                      <p t-if="item.customer">
+                                                         By
+                                                         <t t-esc="item.customer" />
+                                                      </p>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </li>
+                                       </t>
+                                    </ul>
+                                 </slider-component>
+                                 <div class="center" />
+                              </div>
+                           </div>
+                        </section>
+                        <!-- Blog list sections -->
+                        <t t-call="theme_garden.blog_featured" />
+                     </main>
+                  </div>
+               </t>
+            </t>
+         </field>
+      </record>
+      <record id="guest_sharing_garden_page" model="website.page">
+         <field name="url">/guest-sharing</field>
+         <field name="is_published">True</field>
+         <field name="view_id" ref="guest_sharing" />
+         <field name="track">True</field>
+      </record>
+      <record id="menu_guest_sharing_garden" model="website.menu">
+         <field name="name">Guest Sharing</field>
+         <field name="url">/guest-sharing</field>
+         <field name="footer_control">only_footer</field>
+         <field name="page_id" ref="theme_garden.guest_sharing_garden_page" />
+         <field name="parent_id" ref="website.main_menu" />
+         <field name="sequence" type="int">4</field>
+      </record>
+   </data>
+</odoo>
+

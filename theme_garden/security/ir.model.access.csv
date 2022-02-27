@@ -1,0 +1,6 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_theme_garden,garden.config,model_garden_config,base.group_user,1,1,1,1
+access_theme_garden_2,garden.config,model_garden_config,,1,0,0,0
+access_guest_sharing,guest.sharing,model_guest_sharing,base.group_user,1,1,1,1
+access_guest_sharing_2,guest.sharing,model_guest_sharing,,1,0,0,0
+

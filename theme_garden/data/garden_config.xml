@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="garden_config_action" model="ir.actions.act_window">
+            <field name="name">Theme Garden Config</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">garden.config</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="garden_config_tree" model="ir.ui.view">
+            <field name="name">garden.config.tree</field>
+            <field name="model">garden.config</field>
+            <field name="arch" type="xml">
+                <tree create="0" delete="false">
+                    <field name="banner_text"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="garden_config_form" model="ir.ui.view">
+            <field name="name">garden.config.tree</field>
+            <field name="model">garden.config</field>
+            <field name="arch" type="xml">
+                <form create="0" delete="false">
+                    <sheet>
+                        <field name="banner_image"  invisible="1"/>
+                        <group>
+                            <group string="Silder">
+                                <field name="banner_image" widget="image" />
+                                <field name="banner_text" placeholder="A season to love"/>
+                                <field name="banner_text_color" widget="color" string="Text Color"/>
+                                <field name="banner_text_background_color" widget="color" />
+                                <field name="button_text" placeholder="SHOP NOW"/>
+                                <field name="button_text_color" string="Text Color" widget="color"/>
+                                <field name="button_text_background_color" widget="color" />
+                            </group>
+
+                            <group string="Homepage Top Products and Collections">
+                                <field name="show_f_product" />
+                                <field name="top_category_product_ids"  widget="many2many_tags"  attrs="{'invisible': [('show_f_product','=', False)]}" />
+                                <br />
+
+                                <field name="show_top_collections" />
+                                <field name="top_collections_ids" widget="many2many_tags" attrs="{'invisible': [('show_top_collections','=', False)]}" />
+
+                                <h3>Featured Collections on Product Page</h3>
+                                <field name="featured_collection" widget="many2many_tags"/>
+
+                                <h3>Others</h3>
+                                <field name="show_blog_featured"  string="Show Blog Post"/>
+                                <field name="show_guest_post" string="Show Guest Post"/>
+
+
+                            </group>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem id="garden_config_menu" name="Graden Configuration"
+                  parent="website.menu_website_global_configuration"
+                  sequence="15"
+                  action="garden_config_action"/>
+
+        <record id="garden_config_data" model="garden.config">
+            <field name="banner_text">Welcome to Gardena1</field>
+            <field name="button_text">SHOP NOW</field>
+        </record>
+
+        <record id="menu_tree" model="ir.ui.view">
+            <field name="name">website.menu.form</field>
+            <field name="model">website.menu</field>
+            <field name="inherit_id" ref="website.menu_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="group_ids" position="before">
+                        <field name="is_store" />
+                        <field name="footer_control" />
+                    </field>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>

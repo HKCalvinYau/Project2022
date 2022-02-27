@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- Products Search Bar autocomplete item -->
+    <t t-extend="website_sale.productsSearchBar.autocomplete">
+        <t t-jquery="a" t-operation="replace">
+            <a role="button" href="/my/home" class="btn btn-primary" title="Go to Portal">
+                Ogun Day
+            </a>
+        </t>
+    </t>
+</templates>

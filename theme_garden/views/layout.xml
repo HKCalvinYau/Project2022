@@ -2,7 +2,16 @@
 <odoo>
 	  <template id="head_content" inherit_id="web.layout" name="Set Head Content">
 		  <xpath expr="//head" position="inside">
-               <meta property="og:url" content="https://gardeniafloral.xxx.com/" />  
+
+                <!-- bootstrap css -->
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+                          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+                    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+                          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+                
+                <link href="/theme_garden/static/src/css/component-predictive-search.css" rel="stylesheet" type="text/css" media="all" />
+                <script defer="defer" href="/theme_garden/static/src/js/sticky_header.js"  />
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
                 <style id="shopify-dynamic-checkout-cart">@media screen and (min-width: 750px) {
                             #dynamic-checkout-cart {
                             min-height: 50px;
@@ -56,30 +65,27 @@
                     
 
                     :root {
-                      --font-body-family: "Quattrocento Sans", sans-serif;
+
+                      --font-body-family: "Century Gothic", sans-serif;
                       --font-body-style: normal;
                       --font-body-weight: 400;
-
-                      --font-heading-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+                      --font-heading-family: "Century Gothic", sans-serif;
                       --font-heading-style: normal;
                       --font-heading-weight: 400;
-
-                      --color-base-text: 28, 26, 26;
-                      --color-base-background-1: 239, 236, 236;
+                      --color-base-text: 89, 100, 83;
+                      --color-base-background-1: 247, 245, 245;
                       --color-base-background-2: 193, 188, 174;
-                      --color-base-solid-button-labels: 239, 236, 236;
-                      --color-base-outline-button-labels: 123, 131, 130;
-                      --color-base-accent-1: 42, 51, 47;
+                      --color-base-solid-button-labels: 247, 245, 245;
+                      --color-base-outline-button-labels: 89, 100, 83;
+                      --color-base-accent-1: 89, 100, 83;
                       --color-base-accent-2: 71, 97, 84;
-                      --payment-terms-background-color: #efecec;
-
-                      --gradient-base-background-1: #efecec;
+                      --payment-terms-background-color: #f7f5f5;
+                      --gradient-base-background-1: #f7f5f5;
                       --gradient-base-background-2: #c1bcae;
-                      --gradient-base-accent-1: #2a332f;
+                      --gradient-base-accent-1: #596453;
                       --gradient-base-accent-2: #476154;
-
                       --page-width: 160rem;
-                    }
+                  }
 
                     *,
                     *::before,
@@ -97,7 +103,7 @@
                       display: grid;
                       grid-template-rows: auto auto 1fr auto;
                       grid-template-columns: 100%;
-                      min-height: 100%;
+                      overflow:auto;
                       margin: 0;
                       font-size: 1.5rem;
                       letter-spacing: 0.06rem;
@@ -113,6 +119,7 @@
                       }
               }
             </style>
+            
                 
         </xpath>
 		

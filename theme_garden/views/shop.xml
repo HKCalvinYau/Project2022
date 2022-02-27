@@ -1,601 +1,729 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-   <data>
-      <template id="categories_recursive" name="Category list">
-         <li class="list-menu__item facets__item" style="line-height: 0;">
-            <label for="Filter-Product type-1" class="facet-checkbox">
-               <input type="checkbox" t-aff-name="c.name" t-aff-value="c.name" />
-               <!-- 
-                    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                    <rect width="16" height="16" stroke="currentColor" fill="none" stroke-width="1"></rect>
-                    </svg>
 
-                    <svg class="icon icon-checkmark" width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1.5 3.5L2.83333 4.75L4.16667 6L9.5 1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                    -->
-               <a t-att-href="keep('/shop/category/' + slug(c), category=0)" t-attf-class="header__menu-item header__menu-item list-menu__item link link--text focus-inset #{'active' if c.id == category.id else ''}">
-                  <span t-field="c.name" />
-                  (99)
-               </a>
-            </label>
-            <!-- 
-                    <ul t-if="c.child_id" class="facets__list list-unstyled" role="list">
-                        <t t-foreach="c.child_id" t-as="c">
-                            <t t-if="not search or c.id in search_categories_ids">
-                                <t t-call="website_sale.categories_recursive" />
-                            </t>
-                        </t>
-                    </ul>
-                    -->
-         </li>
-      </template>
-      <template id="theme_garden_products" name="Contact Us" inherit_id="website_sale.products">
-         <xpath expr="//div[@id='wrap']" position="replace">
-            <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
-               <div id="shopify-section-template--15058976702649__banner" class="shopify-section spaced-section spaced-section--full-width">
-                  <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-collection-hero.css?v=3341685948607317222" rel="stylesheet" type="text/css" media="all" />
-                  <div class="collection-hero">
-                     <div class="collection-hero__inner page-width">
-                        <div class="collection-hero__text-wrapper">
-                           <h1 class="collection-hero__title">
-                              <span class="visually-hidden">Collection:</span>
-                              Products
-                           </h1>
-                           <!-- Description -->
-                           <div class="collection-hero__description rte" />
+    <template id="assets_predictive_search" inherit_id="website_sale.assets_frontend">
+      <xpath expr="//script[last()]" position="after">
+         <script type="text/javascript" src="/theme_garden/static/src/js/444.js"/>
+      </xpath>
+   </template>
+
+    <!-- Add our own search bar -->
+    <template id="website_sale_products_search_box_garden" inherit_id="website_sale.website_sale_products_search_box">
+        <xpath expr="//form" position="replace">
+            <form t-attf-class="o_wsale_products_searchbar_form_garden o_wait_lazy_js #{_classes}" t-att-action="action if action else '/shop'" method="get" t-att-data-snippet="_snippet">
+                <t>$0</t>
+                <input name="order" type="hidden" class="o_wsale_search_order_by" value=""/>
+                <t t-raw="0"/>
+            </form>
+        </xpath>
+    </template>
+
+    <template id="products_item_custom" inherit_id="website_sale.products_item">
+      <xpath expr="//form" position="replace">
+
+         <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rating.css?v=2457308526394124043" rel="stylesheet" type="text/css" media="all" />
+         <t t-set="product_href" t-value="keep(product.website_url, page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))" />
+        <t t-set="combination_info" t-value="product._get_combination_info(only_template=True, add_qty=add_qty or 1, pricelist=pricelist)" />
+      
+         <div t-att-data-publish="product.website_published and 'on' or 'off'" itemscope="itemscope" itemtype="http://schema.org/Product">
+            <div class="card-wrapper">
+               <a t-att-href="product.website_url" class="full-unstyled-link" style="text-decoration: none;">
+                  <span class="visually-hidden">
+                     <t t-esc="product.name" />
+                  </span>
+                  <div class="card card--product card--outline" tabindex="-1">
+                     <div class="card__inner">
+                        <div>
+                           <div class="media media--transparent media--adapt media--hover-effect" style="padding-bottom: 100.0%;">
+                              <img t-attf-src="/web/image/product.template/#{product.id}/image_1024" loading="lazy" class="motion-reduce" width="1080" height="1080" />
+                              <!--<img srcset="//cdn.shopify.com/s/files/1/0600/5473/2985/products/2_165x.png?v=1644217867 165w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/2_360x.png?v=1644217867 360w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/2_533x.png?v=1644217867 533w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/2_720x.png?v=1644217867 720w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/2_940x.png?v=1644217867 940w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/2_1066x.png?v=1644217867 1066w" src="//cdn.shopify.com/s/files/1/0600/5473/2985/products/2_533x.png?v=1644217867" sizes="(min-width: 1600px) 367px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)" alt="1314情人節套餐" loading="lazy" class="motion-reduce" width="1080" height="1080" /> -->
+                           </div>
+                        </div>
+                        <div class="card__badge" />
+                     </div>
+                  </div>
+                  <div class="card-information">
+                     <div class="card-information__wrapper">
+                        <span class="card-information__text h5">
+                           <t t-esc="product.name" />
+                        </span>
+                        <span class="caption-large light" />
+                        <div class="price ">
+                           <dl>
+                              <div class="price__sale" style="display: inherit;">
+                                 <t t-if="product.regular_price">
+                                    <dt class="price__compare">
+                                       <span class="visually-hidden visually-hidden--inline">Regular price</span>
+                                    </dt>
+                                    <dd class="price__compare">
+                                       <s class="price-item price-item--regular">
+                                          <t t-esc="product.currency_id.symbol" />
+                                          <t t-esc="product.regular_price" />
+                                       </s>
+                                    </dd>
+                                 </t>
+                                 <dt>
+                                    <span class="visually-hidden visually-hidden--inline">Sale price</span>
+                                 </dt>
+                                 <dd>
+                                    <span class="price-item price-item--sale">
+                                       <t t-if="product.product_variant_count &gt; 1">
+                                          From
+                                          <t t-esc="product.currency_id.symbol" />
+                                          <t t-esc="product.list_price" />
+                                       </t>
+                                       <t t-else="">
+                                          <t t-esc="product.currency_id.symbol" />
+                                          <t t-esc="product.list_price" />
+                                       </t>
+                                    </span>
+                                 </dd>
+                              </div>
+                              <small class="unit-price caption hidden">
+                                 <dt class="visually-hidden">Unit price</dt>
+                                 <dd>
+                                    <span />
+                                    <span aria-hidden="true">/</span>
+                                    <span class="visually-hidden">per</span>
+                                    <span />
+                                 </dd>
+                              </small>
+                           </dl>
                         </div>
                      </div>
                   </div>
-                  <div id="shopify-section-template--15058976702649__product-grid" class="shopify-section spaced-section collection-grid-section">
-                     <!-- This block css and styles and scripts-->
-                     <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/template-collection.css?v=6595738038178392633" rel="stylesheet" type="text/css" media="all" />
-                     <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-loading-overlay.css?v=8507244000641785207" rel="stylesheet" type="text/css" media="all" />
+               </a>
+            </div>
+         </div>
+      </xpath>
+   </template>
+
+    
+   <template id="products_grid_custom" inherit_id="website_sale.products" priority="2">
+
+    <xpath expr="//div[@id='products_grid_before']" position="attributes">
+        <attribute name="class">col-lg-2</attribute>
+    </xpath>
+
+                        
+    <xpath expr="//div[hasclass('products_pager')]/t" position="replace">
+        <t t-set="action" t-value="keep('/shop'+ ('/category/'+slug(category)) if category else None, search=0)"/>
+
+        <form t-attf-class="o_wsale_products_searchbar_form_garden w-100 w-md-auto mt-2" t-att-action="action if action else '/shop'" method="get" t-att-data-snippet="_snippet">
+            <div role="search" class="field" style="height: 3.5rem;"> 
+                <input class="search-query search__input field__input" style="height: 3.5rem;" id="Search-In-Modal" type="search" name="search" value="" placeholder="Search..."  aria-expanded="false" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" aria-activedescendant="" data-limit="5" data-display-description="true" data-display-price="true" data-display-image="true" />
+                <label class="field__label" style="top: 0.5rem;" for="Search-In-Modal">Search</label>
+                <input type="hidden" name="options[prefix]" value="last" />
+                <button type="submit" class="search__button field__button" style="top: -0.6rem;" aria-label="Search">
+                    <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
+                        <i class="material-icons" style="font-size:26px; margin-top: 5px;margin-left: -15px;">search</i>
+                    </svg>
+                </button> 
+            </div>
+            <input name="order" type="hidden" class="o_wsale_search_order_by" value=""/>    
+         </form>
+    </xpath>
+
+    <xpath expr="//div[hasclass('container')]" position="after">
+        <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/template-collection.css?v=6595738038178392633" rel="stylesheet" type="text/css" media="all" />
+        <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-loading-overlay.css?v=8507244000641785207" rel="stylesheet" type="text/css" media="all" />
+        <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-card.css?v=9252431989618201249" rel="stylesheet" type="text/css" media="all" />
+        <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-price.css?v=18355640432874979228" rel="stylesheet" type="text/css" media="all" />
+        <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-product-grid.css?v=5354882172846634645" rel="stylesheet" type="text/css" media="all" />
+        <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rte.css?v=8404376346561933237" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+
+        <noscript>
+            <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rte.css?v=8404376346561933237" rel="stylesheet" type="text/css" media="all" />
+        </noscript>
+
+      </xpath> 
+    
+      <xpath expr="//tbody" position="replace">
+        <tbody>
+         <tr t-foreach="bins" t-as="tr_product">
+            <t t-foreach="tr_product" t-as="td_product">
+                <t t-if="td_product">
+                    <t t-set="product" t-value="td_product['product']" />
+                        <!-- We use t-attf-class here to allow easier customization -->
+                         <td style="padding: 7px 7px;" t-att-colspan="td_product['x'] != 1 and td_product['x']"
+                            t-att-rowspan="td_product['y'] != 1 and td_product['y']"
+                            t-attf-class="oe_product"
+                            t-att-data-ribbon-id="td_product['ribbon'].id">
+                             <div t-attf-class="o_wsale_product_grid_wrapper_#{td_product['x']}_#{td_product['y']}">
+                                <t t-call="website_sale.products_item">
+                                <t t-set="product_image_big" t-value="td_product['x'] + td_product['y'] &gt; 2" />
+                                </t>
+                            </div>
+                        </td>
+                    </t>
+                <td t-else=""/>
+            </t>
+         </tr>
+         </tbody>
+      </xpath>
+
+
+
+   </template>
+
+    <template id="show_collections_products" inherit_id="website_sale.products" priority="50" active="True" customize_show="True" name="Top Collections">
+         <xpath expr="//div[hasclass('container')]" position="after">
+               <t t-set="garden_config" t-value="request.env['garden.config'].search([])" />
+               <t t-set="category_data" t-value="garden_config.get_top_3_collections()" />
+               <t t-call="theme_garden.top_collections" />
+               <br />
+         </xpath>
+    </template>
+
+    <template id="show_blog_posts" inherit_id="website_sale.products" priority="20" active="True" customize_show="True" name="Blog Posts">
+         <xpath expr="//div[hasclass('container')]" position="after">
+              <t t-call="theme_garden.blog_featured" />
+              <br />
+         </xpath>
+    </template>
+
+
+
+   
+   <template id="product_information" inherit_id="website_sale.product" priority="99" active="True" customize_show="True" name="Shopify Style Product Info">
+
+      <!--Remove search -->
+      <xpath expr="//div[hasclass('row')]/div[2]" position="replace">
+      </xpath>
+
+      <xpath expr="//div[@id='product_details']" position="replace">
+         <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-main-product.css?v=1392002280200776523" rel="stylesheet" type="text/css" media="all" />
+         <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-accordion.css?v=15509347209324361729" rel="stylesheet" type="text/css" media="all" />
+         <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-price.css?v=18355640432874979228" rel="stylesheet" type="text/css" media="all" />
+         <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rte.css?v=8404376346561933237" rel="stylesheet" type="text/css" media="all" />
+         <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-slider.css?v=8200683548770782072" rel="stylesheet" type="text/css" media="all" />
+         <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rating.css?v=2457308526394124043" rel="stylesheet" type="text/css" media="all" />
+         <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-deferred-media.css?v=17118019895967142225" media="all" onload="this.media='all'" />
+         
+         <t t-set="garden_config" t-value="request.env['garden.config'].search([])" />
+
+         <div class="col-md-6 col-xl-4" id="product_details">
+         <div id="ProductInfo-template--15058976735417__main" class="product__info-container product__info-container--sticky">
+            <p class="product__text caption-with-letter-spacing">Gardenia Floral Studio</p>
+            <!--Company Website Name-->
+            <h1 itemprop="name" t-field="product.name" class="product__title" />
+            <p class="product__text subtitle" />
+            <!-- 
+            <span class="badge price__badge-sale color-accent-2" aria-hidden="true">Sale</span>
+            <span class="badge price__badge-sold-out color-inverse" aria-hidden="true">Sold out</span>
+            -->
+            <!-- 
+            <div>
+               <form method="post" action="/cart/add" id="product-form-installment" accept-charset="UTF-8" class="installment caption-large" enctype="multipart/form-data">
+                  <input type="hidden" name="form_type" value="product" />
+                  <input type="hidden" name="utf8" value="✓" />
+                  <input type="hidden" name="id" value="41082794115257" />
+               </form>
+            </div>
+            -->
+            <form t-if="product._is_add_to_cart_possible()" action="/shop/cart/update" method="POST">
+               <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+               <div class="js_product js_main_product">
+                  <t t-placeholder="select">
+                     <input type="hidden" class="product_id" name="product_id" t-att-value="product_variant.id" />
+                     <input type="hidden" class="product_template_id" name="product_template_id" t-att-value="product.id" />
+                     <t t-if="combination">
+                        <t t-set="ul_class" t-value="'flex-column'" />
+                        <t t-set="parent_combination" t-value="None" />
+                        <t t-set="attribute_exclusions" t-value="product._get_attribute_exclusions(parent_combination, parent_name)" />
+                        <ul t-attf-class="list-unstyled js_add_cart_variants #{ul_class}" t-att-data-attribute_exclusions="json.dumps(attribute_exclusions)">
+                           <variant-radios class="no-js-hidden" data-section="template--15058976735417__main" t-att-data-url="product.website_url">
+                              <t t-foreach="product.valid_product_template_attribute_line_ids" t-as="ptal">
+                                 <fieldset class="js product-form__input"> <!--  -->
+                                    <!-- Attributes selection is hidden if there is only one value available and it's not a custom value -->
+                                    <!-- each attribute -->
+                                    <li t-att-data-attribute_id="ptal.attribute_id.id" t-att-data-attribute_name="ptal.attribute_id.name" t-attf-class="variant_attribute #{'d-none' if len(ptal.product_template_value_ids._only_active()) == 1 and not ptal.product_template_value_ids._only_active()[0].is_custom else ''}">
+                                       <!-- Used to customize layout if the only available attribute value is custom -->
+                                       <t t-set="single" t-value="len(ptal.product_template_value_ids._only_active()) == 1" />
+                                       <t t-set="single_and_custom" t-value="single and ptal.product_template_value_ids._only_active()[0].is_custom" />
+                                       <!-- <strong t-field="ptal.attribute_id.name" class="attribute_name"/> -->
+                                       <legend class="form__label">
+                                          <t t-esc="ptal.attribute_id.name" />
+                                       </legend>
+                                       <t t-if="ptal.attribute_id.display_type == 'radio'">
+                                          <ul t-att-data-attribute_id="ptal.attribute_id.id" t-attf-class="list-unstyled #{'d-none' if single_and_custom else ''}" style="display: inline-flex;">
+                                             <t t-foreach="ptal.product_template_value_ids._only_active()" t-as="ptav">
+                                                <li class="js_attribute_value" style="margin: 0;">
+                                                   <!--Form group -->
+                                                   <div>
+                                                         <input type="radio" t-att-id="ptav.id" t-attf-class="js_variant_change radio_input #{ptal.attribute_id.create_variant}" t-att-checked="ptav in combination" t-att-name="'ptal-%s' % ptal.id" t-att-value="ptav.id" t-att-data-value_id="ptav.id" t-att-data-value_name="ptav.name" t-att-data-attribute_name="ptav.attribute_id.name" t-att-data-is_custom="ptav.is_custom" t-att-data-is_single="single" t-att-data-is_single_and_custom="single_and_custom" />
+                  
+                                                         <label t-att-for="ptav.id" class="radio_input_value">
+                                                            <span t-field="ptav.name" />
+                                                            <span class="badge badge-pill badge-secondary" t-if="ptav.price_extra">
+                                                               <!-- see note above about price_extra -->
+                                                               <t t-esc="ptav.price_extra &gt; 0 and '+' or '-'" />
+                                                               <span t-esc="abs(ptav.price_extra)" class="variant_price_extra" style="white-space: nowrap;" t-options="{                                                             &quot;widget&quot;: &quot;monetary&quot;,                                                             &quot;from_currency&quot;: product.currency_id,                                                             &quot;display_currency&quot;: (pricelist or product).currency_id                                                         }" />
+                                                            </span>
+                                                      
+                                                         </label>
+                                                      
+                                                   </div>
+                                                </li>
+                                             </t>
+                                          </ul>
+                                       </t>
+                                    </li>
+                                 </fieldset>
+                              </t>
+                           </variant-radios>
+                        </ul>
+                     </t>
+                     <t t-else="">
+                        <ul class="d-none js_add_cart_variants" t-att-data-attribute_exclusions="{'exclusions: []'}" />
+                     </t>
+                  </t>
+                  <t t-call="theme_garden.product_price" />
+                  <p t-if="True" class="css_not_available_msg alert alert-warning">This combination does not exist.</p>
+                  <div class="product-form__input product-form__quantity" contenteditable="false"> 
+                     <br />
+
+                     <label class="form__label" >Quantity</label>
+                     <quantity-input class="quantity">
+                         <div class="css_quantity input-group" contenteditable="false">
+                           <div class="input-group-prepend">
+                                 <a t-attf-href="#" class="btn quantity__button js_add_cart_json" aria-label="Remove one" title="Remove one">
+                                    <i class="fa fa-minus"></i>
+                                 </a>
+                              </div>
+                              <input type="text" class="quantity__input quantity" data-min="1" name="add_qty" t-att-value="add_qty or 1"/>
+                              <div class="input-group-append">
+                                 <a t-attf-href="#" class="btn quantity__button float_left js_add_cart_json" aria-label="Add one" title="Add one">
+                                    <i class="fa fa-plus"></i>
+                                 </a>
+                              </div>
+                        </div>
+                     </quantity-input>
+
+                  </div>
+
+                  <!-- Messages -->
+                  <div id="infiniteoptions-container">
+                     <div>
+                        <div class="spb-label-tooltip">
+                           <label for="infinite_options_1-0-0" class="spb-productdescfont spb-productdesctextcolor">Gift Card Message</label>
+                        </div>
+                        <span>
+                           <input type="text" name="gift_card_message" id="infinite_options_1-0-0" class="spb-productdescfont spb-productoptiontextcolor spb-productoptionbackground" placeholder="Message print on Gift Card" />
+                        </span>
+                     </div>
+                     <div>
+                        <div class="spb-label-tooltip"><label for="infinite_options_2-0-1" class="spb-productdescfont spb-productdesctextcolor">Delivery Remark</label></div>
+                        <span>
+                           <input type="text" name="delivery_remark" id="infinite_options_2-0-1" class="spb-productdescfont spb-productoptiontextcolor spb-productoptionbackground" />
+                        </span>
+                     </div>
+                  </div>
+
+                  <!-- Buttons -->
+                  <div class="product-form__buttons">
+                     <br />
+                     <a role="button" id="add_to_cart" class="btn product-form__submit button button--full-width button--secondary js_check_product a-submit" href="#">
+                        <i class="fa fa-shopping-cart" />
+                        Add to Cart
+                     </a>
+                     <div data-shopify="payment-button" data-has-selling-plan="false" class="shopify-payment-button" >
+                        <a role="button" id="buy_now" class="btn button shopify-payment-button__button shopify-payment-button__button--unbranded" href="#" style="width: 100%;line-height: revert;"><i class="fa fa-bolt"/> Buy Now</a>
+                     </div>
+                  </div>
+                  
+                  
+                  <div id="product_option_block" />
+
+               </div>
+            </form>
+            <p t-elif="not product.active" class="alert alert-warning">This product is no longer available.</p>
+            <p t-else="" class="alert alert-warning">This product has no valid combination.</p>
+            <hr t-if="product.description_sale" />
+            <div>
+               <p t-field="product.description_sale" class="text-muted mt-3" placeholder="A short description that will also appear on documents." />
+               <div id="product_attributes_simple">
+                  <hr t-if="sum([(1 if len(l.value_ids)==1 else 0) for l in product.attribute_line_ids])" />
+                  <p class="text-muted">
+                     <t t-set="single_value_attributes" t-value="product.valid_product_template_attribute_line_ids._prepare_single_value_for_display()" />
+                     <t t-foreach="single_value_attributes" t-as="attribute">
+                        <span t-field="attribute.name" />
+                        :
+                        <t t-foreach="single_value_attributes[attribute]" t-as="ptal">
+                           <span t-field="ptal.product_template_value_ids._only_active().name" />
+                           <t t-if="not ptal_last">,</t>
+                        </t>
+                        <br />
+                     </t>
+                  </p>
+               </div>
+            </div>
+            <hr />
+         </div>
+         </div>
+      </xpath>
+   </template>
+
+
+   <template id="product_price">
+      <div itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer" class="product_price mt16">
+          <p class="price css_editable_mode_hidden" style="font-weight: 480;font-size: 2rem;">
+              <span t-attf-class="text-danger oe_default_price {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="text-decoration: line-through; white-space: nowrap;"
+                  t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"
+              />
+              <b class="oe_price" style="white-space: nowrap;" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+              <span itemprop="price" style="display:none;" t-esc="combination_info['price']"/>
+              <span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name"/>
+          </p>
+          <p class="css_non_editable_mode_hidden decimal_precision" t-att-data-precision="str(website.currency_id.decimal_places)">
+            <span t-field="product.list_price"
+                t-options='{
+                   "widget": "monetary",
+                   "display_currency": product.currency_id,
+               }'/>
+          </p>
+      </div>
+    </template>
+
+
+
+    <template id="top_collections" name="Top 3 Collections">
+      <section id="shopify-section-template--15058976768185__1631532587d3dd3305" class="shopify-section spaced-section collection-list-section">
+                     <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/section-collection-list.css?v=11813327385407249073" rel="stylesheet" type="text/css" media="all" />
+                     <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-slider.css?v=8200683548770782072" media="all" onload="this.media='all'" />
+                     <noscript>
+                        <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-slider.css?v=8200683548770782072" rel="stylesheet" type="text/css" media="all" />
+                     </noscript>
+                     <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-card.css?v=9252431989618201249" rel="stylesheet" type="text/css" media="all" />
+                     <div class="collection-list-wrapper page-width no-mobile-link">
+                        <div class="title-wrapper-with-link title-wrapper--self-padded-mobile">
+                           <h2 class="collection-list-title">Collections</h2>
+                        </div>
+                        <slider-component class="slider-mobile-gutter">
+                           <ul class="collection-list grid grid--1-col grid--3-col-tablet collection-list--3-items negative-margin--small" id="Slider-template--15058976768185__1631532587d3dd3305" role="list">
+                              <t t-set="category_data" t-value="garden_config.get_top_3_collections()" />
+                              <t t-foreach="category_data" t-as="item">
+                                 <li class="collection-list__item grid__item">
+                                 <a t-att-href="item.get_category_url()" class="card animate-arrow link card--media card--light-border" style="text-decoration: none;">
+                                    <div class="card--stretch card-colored color-background-1">
+                                          <div>
+                                             <div class="media media--square media--hover-effect overflow-hidden">
+                                                <t t-if="category_data[item]">
+                                                      <img t-attf-src="/web/image/product.template/#{category_data[item].id}/image_1024" sizes="(min-width: 1600px) 500px,(min-width: 750px) calc((100vw - 10rem) / 2),calc(100vw - 3rem)" alt="CNY 2022" height="2160" width="2160" loading="lazy" class="motion-reduce" />
+                                                </t>
+                                                <t t-else="">
+                                                      <img t-attf-src="/web/image/product.template//image_1024" sizes="(min-width: 1600px) 500px,(min-width: 750px) calc((100vw - 10rem) / 2),calc(100vw - 3rem)" alt="CNY 2022" height="2160" width="2160" loading="lazy" class="motion-reduce" />
+                                                </t>
+                                             </div>
+                                          </div>
+                                          <div class="card__text card__text-spacing card-colored card__text-hover color-background-1">
+                                             <div class="overlay-card" />
+                                             <h3>
+                                             <t t-esc="item.name" />
+                                             <span class="icon-wrap">
+                                                
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow">
+                                                      <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor" />
+                                                </svg>
+                                             </span>
+                                             </h3>
+                                          </div>
+                                    </div>
+                                 </a>
+                                 </li>
+                              </t>
+                           
+                           </ul>
+                        </slider-component>
+                     </div>
+                  </section>
+    </template>
+
+       
+      
+      
+
+      <template id="featured_collection" name="Featured Collection">
+                  <t t-set="category_data" t-value="garden_config.get_featured_collection()" />
+                  <t t-foreach="category_data" t-as="item">
+                     <section id="shopify-section-template--15058976768185__featured_products" class="shopify-section spaced-section">
                      <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-card.css?v=9252431989618201249" rel="stylesheet" type="text/css" media="all" />
                      <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-price.css?v=18355640432874979228" rel="stylesheet" type="text/css" media="all" />
                      <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-product-grid.css?v=5354882172846634645" rel="stylesheet" type="text/css" media="all" />
-                     <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rte.css?v=8404376346561933237" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+                     <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-slider.css?v=8200683548770782072" media="all" onload="this.media='all'" />
+                     <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/template-collection.css?v=6595738038178392633" media="all" onload="this.media='all'" />
                      <noscript>
-                        <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rte.css?v=8404376346561933237" rel="stylesheet" type="text/css" media="all" />
+                        <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-slider.css?v=8200683548770782072" rel="stylesheet" type="text/css" media="all" />
                      </noscript>
-                     <script src="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/collection-filters-form.js?v=10407663374973607297" defer="defer" />
-                     <div class="page-width collection-filters" id="main-collection-filters" data-id="template--15058976702649__product-grid">
-                        <collection-filters-form class="facets small-hide">
-                           <form id="CollectionFiltersForm" class="facets__form">
-                              <div id="FacetsWrapperDesktop" class="facets__wrapper">
-                                 <p class="facets__heading caption-large">Filter:</p>
-                                 <details class="disclosure-has-popup facets__disclosure js-filter" data-index="1" open="">
-                                    <summary class="facets__summary caption-large focus-offset">
-                                       <div>
-                                          <span>Price</span>
-                                          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
-                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor" />
-                                          </svg>
-                                       </div>
-                                    </summary>
-                                    <div class="facets__display">
-                                       <div class="facets__header">
-                                          <span class="facets__selected">The highest price is $5,880.00</span>
-                                          <facet-remove>
-                                             <a href="/collections/all" class="facets__reset link underlined-link">Reset</a>
-                                          </facet-remove>
-                                       </div>
-                                       <price-range class="facets__price">
-                                          <span class="field-currency">$</span>
-                                          <div class="field">
-                                             <input class="field__input" name="filter.v.price.gte" id="Filter-Price-GTE" type="number" placeholder="0" min="0" max="5880.00" />
-                                             <label class="field__label" for="Filter-Price-GTE">From</label>
-                                          </div>
-                                          <span class="field-currency">$</span>
-                                          <div class="field">
-                                             <input class="field__input" name="filter.v.price.lte" id="Filter-Price-LTE" type="number" min="0" placeholder="5880.00" max="5880.00" />
-                                             <label class="field__label" for="Filter-Price-LTE">To</label>
-                                          </div>
-                                       </price-range>
-                                    </div>
-                                 </details>
-                                 <details class="disclosure-has-popup facets__disclosure js-filter" data-index="2">
-                                    <summary class="facets__summary caption-large focus-offset">
-                                       <div>
-                                          <span>Product type</span>
-                                          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
-                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor" />
-                                          </svg>
-                                       </div>
-                                    </summary>
-                                    <div class="facets__display">
-                                       <div class="facets__header">
-                                          <span class="facets__selected no-js-hidden">0 selected</span>
-                                          <facet-remove>
-                                             <a href="/shop" class="facets__reset link underlined-link">Reset</a>
-                                          </facet-remove>
-                                       </div>
-                                       <ul class="facets__list list-unstyled" role="list">
-                                          <li class="list-menu__item facets__item" style="line-height: 0;">
-                                             <label for="Filter-Product type-1" class="facet-checkbox">
-                                                <!-- <input type="checkbox" t-aff-name="" t-aff-value="All Products" id="" />-->
-                                                <!-- 
-                                                                <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                                                                    <rect width="16" height="16" stroke="currentColor" fill="none" stroke-width="1"></rect>
-                                                                </svg>
-
-                                                                <svg class="icon icon-checkmark" width="11" height="7" viewBox="0 0 11 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M1.5 3.5L2.83333 4.75L4.16667 6L9.5 1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                                </svg>
-                                                                -->
-                                                <a t-att-href="keep('/shop', category=0)" t-attf-class="nav-link #{'' if category else 'active'} o_not_editable">All Products</a>
-                                             </label>
-                                          </li>
-                                          <t t-foreach="categories" t-as="c">
-                                             <t t-call="theme_garden.categories_recursive" />
-                                          </t>
-                                       </ul>
-                                    </div>
-                                 </details>
-                                 <details class="disclosure-has-popup facets__disclosure js-filter" data-index="3">
-                                    <summary class="facets__summary caption-large focus-offset">
-                                       <div>
-                                          <span>Availability</span>
-                                          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
-                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor" />
-                                          </svg>
-                                       </div>
-                                    </summary>
-                                    <div class="facets__display">
-                                       <div class="facets__header">
-                                          <span class="facets__selected no-js-hidden">0 selected</span>
-                                          <facet-remove>
-                                             <a href="/collections/all" class="facets__reset link underlined-link">Reset</a>
-                                          </facet-remove>
-                                       </div>
-                                       <ul class="facets__list list-unstyled" role="list">
-                                          <li class="list-menu__item facets__item">
-                                             <label for="Filter-Availability-1" class="facet-checkbox">
-                                                <input type="checkbox" name="filter.v.availability" value="1" id="Filter-Availability-1" />
-                                                <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                                                   <rect width="16" height="16" stroke="currentColor" fill="none" stroke-width="1" />
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-checkmark" width="11" height="7" viewBox="0 0 11 7" fill="none">
-                                                   <path d="M1.5 3.5L2.83333 4.75L4.16667 6L9.5 1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                                In stock (70)
-                                             </label>
-                                          </li>
-                                          <li class="list-menu__item facets__item">
-                                             <label for="Filter-Availability-2" class="facet-checkbox facet-checkbox--disabled">
-                                                <input type="checkbox" name="filter.v.availability" value="0" id="Filter-Availability-2" disabled="" />
-                                                <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                                                   <rect width="16" height="16" stroke="currentColor" fill="none" stroke-width="1" />
-                                                </svg>
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-checkmark" width="11" height="7" viewBox="0 0 11 7" fill="none">
-                                                   <path d="M1.5 3.5L2.83333 4.75L4.16667 6L9.5 1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                                Out of stock (0)
-                                             </label>
-                                          </li>
-                                       </ul>
-                                    </div>
-                                 </details>
-                                 <noscript>
-                                    <button type="submit" class="facets__button-no-js button button--tertiary">Filter</button>
-                                 </noscript>
-                              </div>
-                              <div class="active-facets active-facets-desktop">
-                                 <facet-remove class="active-facets__button-wrapper">
-                                    <a href="/collections/all?sort_by=title-ascending" class="active-facets__button-remove underlined-link">
-                                       <span>Clear all</span>
-                                    </a>
-                                 </facet-remove>
-                              </div>
-                              <div class="collection-filters__item sorting caption">
-                                 <div class="collection-filters__field">
-                                    <label class="collection-filters__label caption-large" for="SortBy">Sort by:</label>
-                                    <div class="select">
-                                       <t t-set="list_price_desc_label">Catalog price: High to Low</t>
-                                       <t t-set="list_price_asc_label">Catalog price: Low to High</t>
-                                       <t t-set="name_asc_label">Name: A to Z</t>
-                                       <t t-set="name_desc_label">Name: Z to A</t>
-                                       <t t-set="website_sale_sortable" t-value="[                                                         (list_price_desc_label, 'list_price desc'),                                                         (list_price_asc_label, 'list_price asc'),                                                         (name_asc_label, 'name asc'),                                                         (name_desc_label, 'name desc')                                                     ]" />
-                                       <t t-set="website_sale_sortable_current" t-value="[sort for sort in website_sale_sortable if sort[1]==request.params.get('order', '')]" />
-                                       <select name="sort_by" class="collection-filters__sort select__select caption-large" id="SortBy" aria-describedby="a11y-refresh-page-message">
-                                          <t t-foreach="website_sale_sortable" t-as="sortby">
-                                             <a t-att-href="keep('/shop', order=sortby[1])" class="dropdown-item">
-                                                <option t-aff-value="sortby[1]">
-                                                   <span t-raw="sortby[0]" />
-                                                </option>
-                                             </a>
-                                          </t>
-                                       </select>
-                                       <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
-                                          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor" />
-                                       </svg>
-                                    </div>
-                                 </div>
-                                 <noscript>
-                                    <button type="submit" class="facets__button-no-js button button--tertiary">Sort</button>
-                                 </noscript>
-                              </div>
-                              <div class="collection-product-count light" role="status">
-                                 <p id="CollectionProductCountDesktop" class="collection-product-count__text">70 products</p>
-                                 <div class="loading-overlay__spinner">
-                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66">
-                                       <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30" />
-                                    </svg>
-                                 </div>
-                              </div>
-                           </form>
-                        </collection-filters-form>
-                        <menu-drawer class="mobile-facets__wrapper  medium-hide large-up-hide" data-breakpoint="mobile">
-                           <details class="mobile-facets__disclosure disclosure-has-popup">
-                              <summary class="mobile-facets__open-wrapper focus-offset" role="button" aria-expanded="false" aria-controls="">
-                                 <span class="mobile-facets__open">
-                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="icon icon-filter" fill="none" viewBox="0 11 20 20">
-                                       <line x1="16.5" y1="17.5" x2="3.5" y2="17.5" stroke="#3F7972" stroke-linecap="round" />
-                                       <line x1="16.5" y1="24.5" x2="3.5" y2="24.5" stroke="#3F7972" stroke-linecap="round" />
-                                       <circle cx="13" cy="24.5" r="2" fill="white" stroke="#3F7972" />
-                                       <circle cx="7" cy="17.5" r="2" fill="white" stroke="#3F7972" />
-                                    </svg>
-                                    <span class="mobile-facets__open-label button-label">Filter and sort</span>
-                                 </span>
-                                 <span tabindex="0" class="mobile-facets__close mobile-facets__close--no-js">
-                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" fill="none" viewBox="0 0 18 17">
-                                       <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor" />
-                                    </svg>
-                                 </span>
-                              </summary>
-                              <collection-filters-form>
-                                 <form id="CollectionFiltersFormMobile" class="mobile-facets">
-                                    <div class="mobile-facets__inner">
-                                       <div class="mobile-facets__header">
-                                          <div class="mobile-facets__header-inner">
-                                             <h2 class="mobile-facets__heading">Filter and sort</h2>
-                                             <p class="mobile-facets__count">70 of 70 products</p>
-                                          </div>
-                                       </div>
-                                       <div class="mobile-facets__main">
-                                          <details class="mobile-facets__details js-filter" data-index="mobile-1">
-                                             <summary class="mobile-facets__summary focus-inset" role="button" aria-expanded="false" aria-controls="">
-                                                <div>
-                                                   <span>Price</span>
-                                                   <span class="mobile-facets__arrow no-js-hidden">
-                                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow">
-                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor" />
-                                                      </svg>
-                                                   </span>
-                                                   <noscript>
-                                                      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
-                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor" />
-                                                      </svg>
-                                                   </noscript>
-                                                </div>
-                                             </summary>
-                                             <div class="mobile-facets__submenu">
-                                                <button class="mobile-facets__close-button link link--text focus-inset" aria-expanded="true" type="button">
-                                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow">
-                                                      <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor" />
-                                                   </svg>
-                                                   Price
-                                                </button>
-                                                <p class="mobile-facets__info">The highest price is $5,880.00</p>
-                                                <price-range class="facets__price">
-                                                   <span class="field-currency">$</span>
-                                                   <div class="field">
-                                                      <input class="field__input" name="filter.v.price.gte" id="Mobile-Filter-Price-GTE" type="number" placeholder="0" min="0" inputmode="decimal" max="5880.00" />
-                                                      <label class="field__label" for="Mobile-Filter-Price-GTE">From</label>
-                                                   </div>
-                                                   <span class="field-currency">$</span>
-                                                   <div class="field">
-                                                      <input class="field__input" name="filter.v.price.lte" id="Mobile-Filter-Price-LTE" type="number" min="0" inputmode="decimal" placeholder="5880.00" max="5880.00" />
-                                                      <label class="field__label" for="Mobile-Filter-Price-LTE">To</label>
-                                                   </div>
-                                                </price-range>
-                                                <div class="no-js-hidden mobile-facets__footer">
-                                                   <facet-remove class="mobile-facets__clear-wrapper">
-                                                      <a href="/collections/all" class="mobile-facets__clear underlined-link">Clear</a>
-                                                   </facet-remove>
-                                                   <button type="button" class="no-js-hidden button button--primary" onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()">Apply</button>
-                                                   <noscript>
-                                                      <button class="button button--primary">Apply</button>
-                                                   </noscript>
-                                                </div>
-                                             </div>
-                                          </details>
-                                          <!-- Mobile Product Types-->
-                                          <details class="mobile-facets__details js-filter" data-index="mobile-2">
-                                             <summary class="mobile-facets__summary focus-inset" role="button" aria-expanded="false" aria-controls="">
-                                                <div>
-                                                   <span>Product type</span>
-                                                   <span class="mobile-facets__arrow no-js-hidden">
-                                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow">
-                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor" />
-                                                      </svg>
-                                                   </span>
-                                                   <noscript>
-                                                      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
-                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor" />
-                                                      </svg>
-                                                   </noscript>
-                                                </div>
-                                             </summary>
-                                             <div class="mobile-facets__submenu">
-                                                <button class="mobile-facets__close-button link link--text focus-inset" aria-expanded="true" type="button">
-                                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow">
-                                                      <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor" />
-                                                   </svg>
-                                                   Product type
-                                                </button>
-                                                <ul class="mobile-facets__list list-unstyled" role="list">
-                                                   <li class="mobile-facets__item list-menu__item">
-                                                      <label for="Filter-Product type-mobile-1" class="mobile-facets__label">
-                                                         <input class="mobile-facets__checkbox" type="checkbox" name="filter.p.product_type" value="Addition" id="Filter-Product type-mobile-1" />
-                                                         <span class="mobile-facets__highlight" />
-                                                         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                                                            <rect width="16" height="16" stroke="currentColor" fill="none" stroke-width="1" />
-                                                         </svg>
-                                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-checkmark" width="11" height="7" viewBox="0 0 11 7" fill="none">
-                                                            <path d="M1.5 3.5L2.83333 4.75L4.16667 6L9.5 1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
-                                                         </svg>
-                                                         Addition (8)
-                                                      </label>
-                                                   </li>
-                                                   <li class="mobile-facets__item list-menu__item">
-                                                      <label for="Filter-Product type-mobile-2" class="mobile-facets__label">
-                                                         <input class="mobile-facets__checkbox" type="checkbox" name="filter.p.product_type" value="Bouquet" id="Filter-Product type-mobile-2" />
-                                                         <span class="mobile-facets__highlight" />
-                                                         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                                                            <rect width="16" height="16" stroke="currentColor" fill="none" stroke-width="1" />
-                                                         </svg>
-                                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-checkmark" width="11" height="7" viewBox="0 0 11 7" fill="none">
-                                                            <path d="M1.5 3.5L2.83333 4.75L4.16667 6L9.5 1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
-                                                         </svg>
-                                                         Bouquet (20)
-                                                      </label>
-                                                   </li>
-                                                </ul>
-                                                <div class="no-js-hidden mobile-facets__footer">
-                                                   <facet-remove class="mobile-facets__clear-wrapper">
-                                                      <a href="/collections/all" class="mobile-facets__clear underlined-link">Clear</a>
-                                                   </facet-remove>
-                                                   <button type="button" class="no-js-hidden button button--primary" onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()">Apply</button>
-                                                   <noscript>
-                                                      <button class="button button--primary">Apply</button>
-                                                   </noscript>
-                                                </div>
-                                             </div>
-                                          </details>
-                                          <details class="mobile-facets__details js-filter" data-index="mobile-3">
-                                             <summary class="mobile-facets__summary focus-inset" role="button" aria-expanded="false" aria-controls="">
-                                                <div>
-                                                   <span>Availability</span>
-                                                   <span class="mobile-facets__arrow no-js-hidden">
-                                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow">
-                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor" />
-                                                      </svg>
-                                                   </span>
-                                                   <noscript>
-                                                      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
-                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor" />
-                                                      </svg>
-                                                   </noscript>
-                                                </div>
-                                             </summary>
-                                             <div class="mobile-facets__submenu">
-                                                <button class="mobile-facets__close-button link link--text focus-inset" aria-expanded="true" type="button">
-                                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow">
-                                                      <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor" />
-                                                   </svg>
-                                                   Availability
-                                                </button>
-                                                <ul class="mobile-facets__list list-unstyled" role="list">
-                                                   <li class="mobile-facets__item list-menu__item">
-                                                      <label for="Filter-Availability-mobile-1" class="mobile-facets__label">
-                                                         <input class="mobile-facets__checkbox" type="checkbox" name="filter.v.availability" value="1" id="Filter-Availability-mobile-1" />
-                                                         <span class="mobile-facets__highlight" />
-                                                         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                                                            <rect width="16" height="16" stroke="currentColor" fill="none" stroke-width="1" />
-                                                         </svg>
-                                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-checkmark" width="11" height="7" viewBox="0 0 11 7" fill="none">
-                                                            <path d="M1.5 3.5L2.83333 4.75L4.16667 6L9.5 1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
-                                                         </svg>
-                                                         In stock (70)
-                                                      </label>
-                                                   </li>
-                                                   <li class="mobile-facets__item list-menu__item">
-                                                      <label for="Filter-Availability-mobile-2" class="mobile-facets__label mobile-facets__label--disabled">
-                                                         <input class="mobile-facets__checkbox" type="checkbox" name="filter.v.availability" value="0" id="Filter-Availability-mobile-2" disabled="" />
-                                                         <span class="mobile-facets__highlight" />
-                                                         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                                                            <rect width="16" height="16" stroke="currentColor" fill="none" stroke-width="1" />
-                                                         </svg>
-                                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-checkmark" width="11" height="7" viewBox="0 0 11 7" fill="none">
-                                                            <path d="M1.5 3.5L2.83333 4.75L4.16667 6L9.5 1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
-                                                         </svg>
-                                                         Out of stock (0)
-                                                      </label>
-                                                   </li>
-                                                </ul>
-                                                <div class="no-js-hidden mobile-facets__footer">
-                                                   <facet-remove class="mobile-facets__clear-wrapper">
-                                                      <a href="/collections/all" class="mobile-facets__clear underlined-link">Clear</a>
-                                                   </facet-remove>
-                                                   <button type="button" class="no-js-hidden button button--primary" onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()">Apply</button>
-                                                   <noscript>
-                                                      <button class="button button--primary">Apply</button>
-                                                   </noscript>
-                                                </div>
-                                             </div>
-                                          </details>
-                                          <div class="mobile-facets__details js-filter" data-index="mobile-">
-                                             <div class="mobile-facets__summary">
-                                                <div class="mobile-facets__sort">
-                                                   <label for="SortBy-mobile">Sort by:</label>
-                                                   <div class="select">
-                                                      <select name="sort_by" class="select__select" id="SortBy-mobile" aria-describedby="a11y-refresh-page-message">
-                                                         <option value="manual">Featured</option>
-                                                         <option value="best-selling">Best selling</option>
-                                                         <option value="title-ascending" selected="selected">Alphabetically, A-Z</option>
-                                                         <option value="title-descending">Alphabetically, Z-A</option>
-                                                         <option value="price-ascending">Price, low to high</option>
-                                                         <option value="price-descending">Price, high to low</option>
-                                                         <option value="created-ascending">Date, old to new</option>
-                                                         <option value="created-descending">Date, new to old</option>
-                                                      </select>
-                                                      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
-                                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor" />
-                                                      </svg>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="mobile-facets__footer">
-                                             <facet-remove class="mobile-facets__clear-wrapper">
-                                                <a href="/collections/all" class="mobile-facets__clear underlined-link">Clear all</a>
-                                             </facet-remove>
-                                             <button type="button" class="no-js-hidden button button--primary" onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()">Apply</button>
-                                             <noscript>
-                                                <button class="button button--primary">Apply</button>
-                                             </noscript>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </form>
-                              </collection-filters-form>
-                           </details>
-                        </menu-drawer>
-                        <div class="active-facets active-facets-mobile  medium-hide large-up-hide">
-                           <facet-remove class="active-facets__button-wrapper">
-                              <a href="/collections/all?sort_by=title-ascending" class="active-facets__button-remove underlined-link">
-                                 <span>Clear all</span>
-                              </a>
-                           </facet-remove>
+                     <noscript>
+                        <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/template-collection.css?v=6595738038178392633" rel="stylesheet" type="text/css" media="all" />
+                     </noscript>
+                     <div class="collection page-width">
+                        <div class="title-wrapper-with-link">
+                           <h2 class="title"> Featured Collection</h2>
                         </div>
-                        <div class="collection-product-count light medium-hide large-up-hide" role="status">
-                           <p id="CollectionProductCount" class="collection-product-count__text">70 products</p>
-                           <div class="loading-overlay__spinner">
-                              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66">
-                                 <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30" />
-                              </svg>
-                           </div>
-                        </div>
-                     </div>
+                        <slider-component class="slider-mobile-gutter">
+                           <ul class="grid grid--2-col product-grid grid--2-col-tablet grid--4-col-desktop negative-margin--small" role="list">
+                              <t t-foreach="category_data[item]" t-as="product">
+                                 <li class="grid__item">
+                                    <!-- <t t-set="product_href" t-value="/shop" /> t-att-href="/shop" -->
+                                    <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rating.css?v=2457308526394124043" rel="stylesheet" type="text/css" media="all" />
+                                    <div class="card-wrapper">
+                                       <a t-att-href="product.website_url" class="full-unstyled-link" style="text-decoration: none;">
+                                          <span class="visually-hidden"><t t-esc="product.name" /></span>
+                                           
+                                          <div class="card card--product card--outline" tabindex="-1">
+                                             <div class="card__inner">
+                                                <div>
+                                                   <div class="media media--transparent media--square media--hover-effect">
+                                                      <!--
+                                                         <img srcset="//cdn.shopify.com/s/files/1/0600/5473/2985/products/82_165x.png?v=1642158488 165w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/82_360x.png?v=1642158488 360w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/82_533x.png?v=1642158488 533w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/82_720x.png?v=1642158488 720w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/82_940x.png?v=1642158488 940w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/82_1066x.png?v=1642158488 1066w" src="//cdn.shopify.com/s/files/1/0600/5473/2985/products/82_533x.png?v=1642158488" sizes="(min-width: 1600px) 367px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)" alt="My Dearest" loading="lazy" class="motion-reduce" width="2160" height="2160" />
+                                                      -->
+                                                      
+                                                         <img t-attf-src="/web/image/product.template/#{product.id}/image_1024" sizes="(min-width: 1600px) 367px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)" alt="My Dearest" loading="lazy" class="motion-reduce" width="2160" height="2160" />
 
-                     <!-- product grids-->
-                    
-                    <div id="CollectionProductGrid">
-                        <div class="collection page-width">
-                            <div class="loading-overlay gradient" />
-                            <ul id="main-collection-product-grid" data-id="template--15058976702649__product-grid" class="grid grid--2-col negative-margin product-grid grid--3-col-tablet grid--one-third-max grid--4-col-desktop grid--quarter-max">
-                                <t t-foreach="products" t-as="product">
-                                    <t t-set="product_href" t-value="keep(product.website_url, page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))" />
-                                    <li class="grid__item">
-                                        <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rating.css?v=2457308526394124043" rel="stylesheet" type="text/css" media="all" />
-                                        <div class="card-wrapper">
-                                        <a t-att-href="product_href" class="full-unstyled-link">
-                                            <span class="visually-hidden" t-field="product.name"></span> 
-                                            <div class="card card--product card--outline" tabindex="-1">
-                                                <div class="card__inner">
-                                                    <div>
-                                                    <div class="media media--transparent media--adapt media--hover-effect" style="padding-bottom: 100.0%;">
-
-                                                    <!--
-                                                        <img srcset="//cdn.shopify.com/s/files/1/0600/5473/2985/products/IMG_93462_a_165x.jpg?v=1631868734 165w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/IMG_93462_a_360x.jpg?v=1631868734 360w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/IMG_93462_a_533x.jpg?v=1631868734 533w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/IMG_93462_a_720x.jpg?v=1631868734 720w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/IMG_93462_a_940x.jpg?v=1631868734 940w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/IMG_93462_a_1066x.jpg?v=1631868734 1066w" src="//cdn.shopify.com/s/files/1/0600/5473/2985/products/IMG_93462_a_533x.jpg?v=1631868734" sizes="(min-width: 1600px) 367px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)" alt="Delightful Day" loading="lazy" class="motion-reduce" width="2880" height="2880" />
-                                                    -->
-                                                        <t t-set="image_holder" t-value="product._get_image_holder()"/>
-                                                        <span t-field="image_holder.image_1920"
-                                                            t-options="{'widget': 'image', 'preview_image': 'image_1024', 'itemprop': 'image'}"
-                                                           sizes="(min-width: 1600px) 367px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)" 
-                                                           t-att-alt="product.name" loading="lazy" class="motion-reduce" width="2880" height="2880" 
-                                                            />
-
-                                                    </div>
-                                                    </div>
-                                                    <div class="card__badge" />
+                                                      <!--
+                                                      <t t-set="image_holder" t-value="product._get_image_holder()"/>
+                                                      <span t-field="image_holder.image_1920"
+                                                         t-options="{'widget': 'image', 'preview_image': 'image_1024', 'itemprop': 'image'}"
+                                                         sizes="(min-width: 1600px) 367px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)" 
+                                                               t-att-alt="product.name" loading="lazy" class="motion-reduce" width="2880" height="2880" 
+                                                         />
+                                                         -->
+                                                   </div>
                                                 </div>
-                                            </div>
-                                            <div class="card-information">
-                                                <div class="card-information__wrapper">
-                                                    <span class="card-information__text h5" t-field="product.name"></span>
-                                                    <span class="caption-large light" />
-                                                    <div class="price ">
-                                                    <dl>
-                                                        <div class="price__regular">
+                                                
+                                             </div>
+                                          </div>
+                                          <div class="card-information">
+                                             <div class="card-information__wrapper">
+                                                <span class="card-information__text h5"><t t-esc="product.name" /></span>
+                                                <span class="caption-large light" />
+                                                <div class="price  price--on-sale ">
+                                                   <dl>
+                                                      <!-- 
+                                                      <div class="price__regular">
                                                             <dt>
-                                                                <span class="visually-hidden visually-hidden--inline">Regular price</span>
+                                                               <span class="visually-hidden visually-hidden-/-inline">Regular price</span>
                                                             </dt>
                                                             <dd>
-                                                                <span class="price-item price-item--regular">From HK$980.00</span>
+                                                               <span class="price-item price-item-/-regular"><t t-esc="product.currency_id.symbol" /><t t-esc="product.list_price" /></span>
                                                             </dd>
-                                                        </div>
-                                                        <div class="price__sale">
-                                                            <dt class="price__compare">
-                                                                <span class="visually-hidden visually-hidden--inline">Regular price</span>
-                                                            </dt>
-                                                            <dd class="price__compare">
-                                                                <s class="price-item price-item--regular" />
-                                                            </dd>
-                                                            <dt>
-                                                                <span class="visually-hidden visually-hidden--inline">Sale price</span>
-                                                            </dt>
-                                                            <dd>
-                                                                <span class="price-item price-item--sale">From HK$980.00</span>
-                                                            </dd>
-                                                        </div>
-                                                        <small class="unit-price caption hidden">
-                                                            <dt class="visually-hidden">Unit price</dt>
-                                                            <dd>
-                                                                <span />
-                                                                <span aria-hidden="true">/</span>
-                                                                <span class="visually-hidden"> pe </span>
-                                                                <span />
-                                                            </dd>
-                                                        </small>
-                                                    </dl>
-                                                    </div>
+                                                      </div>
+                                                      -->
+                                                      
+                                                      <div class="price__sale">
+                                                      <t t-if="product.regular_price">
+                                                         <dt class="price__compare">
+                                                            <span class="visually-hidden visually-hidden--inline">Regular price</span>
+                                                         </dt>
+                                                         <dd class="price__compare">
+                                                            <s class="price-item price-item--regular">
+                                                            
+                                                               <t t-esc="product.currency_id.symbol" />
+                                                               <t t-esc="product.regular_price" />
+                                                            </s>
+                                                         </dd>
+                                                      </t>
+
+                                                         <dt>
+                                                            <span class="visually-hidden visually-hidden--inline">Sale price</span>
+                                                         </dt>
+                                                         <dd>
+                                                            <span class="price-item price-item--sale">
+                                                               <t t-if="product.product_variant_count &gt; 1">
+                                                                  From 
+                                                                  <t t-esc="product.currency_id.symbol" />
+                                                                  <t t-esc="product.list_price" />
+                                                               </t>
+                                                               <t t-else="">
+                                                                  <t t-esc="product.currency_id.symbol" />
+                                                                  <t t-esc="product.list_price" />
+                                                               </t>
+                                                            </span>
+                                                         </dd>
+                                                      </div>
+                                                      <small class="unit-price caption hidden">
+                                                         <dt class="visually-hidden">Unit price</dt>
+                                                         <dd>
+                                                            <span />
+                                                            <span aria-hidden="true">/</span>
+                                                            <span class="visually-hidden"> per </span>
+                                                            <span />
+                                                         </dd>
+                                                      </small>
+                                                   </dl>
                                                 </div>
-                                            </div>
-                                        </a>
-                                        </div>
-                                    </li>
-                                </t>
-                            </ul>
-
-                            <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-pagination.css?v=9593385559467435565" media="all" onload="this.media='all'" />
-                            <noscript>
-                                <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-pagination.css?v=9593385559467435565" rel="stylesheet" type="text/css" media="all" />
-                            </noscript>
-
-                            <div class="pagination-wrapper">
-                                <nav class="pagination" role="navigation" aria-label="Pagination">
-                                    <ul class="pagination__list list-unstyled" role="list">
-                                    <li>
-                                        <span class="pagination__item pagination__item--current" aria-current="page" aria-label="Page 1">1</span>
-                                    </li>
-                                    <li>
-                                        <a href="/collections/all?filter.p.product_type=Bouquet&amp;filter.p.product_type=Flower+Box&amp;filter.p.product_type=Fruit+Hamper&amp;filter.v.price.gte=1000.00&amp;filter.v.price.lte=2000.00&amp;page=2&amp;sort_by=price-ascending" class="pagination__item link" aria-label="Page 2">2</a>
-                                    </li>
-                                    <li>
-                                        <a href="/collections/all?filter.p.product_type=Bouquet&amp;filter.p.product_type=Flower+Box&amp;filter.p.product_type=Fruit+Hamper&amp;filter.v.price.gte=1000.00&amp;filter.v.price.lte=2000.00&amp;page=2&amp;sort_by=price-ascending" class="pagination__item pagination__item--prev pagination__item-arrow link motion-reduce" aria-label="Next page">
-                                            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
-                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor" />
-                                            </svg>
-                                        </a>
-                                    </li>
-                                    </ul>
-                                </nav>
-                            </div>
-
-                        </div>
+                                                
+                                             </div>
+                                          </div>
+                                       </a>
+                                    </div>
+                                 
+                                 </li>
+                                 
+                              </t>
+                          </ul>
+                      </slider-component>
+                      <div class="center">
+                          <a t-att-href="item.get_category_url()"  class="button home-link" style="text-decoration: none;" aria-label="View all products in this collection">View all</a>
+                      </div>
                     </div>
+                  </section>
+
+                  </t>
+         </template>
 
 
+       <template id="4_random_products" name="Products You May Like">
+                  <t t-set="products" t-value="garden_config.get_random_4_products()" />
+                  <section id="shopify-section-template--15058976768185__featured_products" class="shopify-section spaced-section">
+                     <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-card.css?v=9252431989618201249" rel="stylesheet" type="text/css" media="all" />
+                     <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-price.css?v=18355640432874979228" rel="stylesheet" type="text/css" media="all" />
+                     <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-product-grid.css?v=5354882172846634645" rel="stylesheet" type="text/css" media="all" />
+                     <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-slider.css?v=8200683548770782072" media="all" onload="this.media='all'" />
+                     <link rel="stylesheet" href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/template-collection.css?v=6595738038178392633" media="all" onload="this.media='all'" />
+                     <noscript>
+                        <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-slider.css?v=8200683548770782072" rel="stylesheet" type="text/css" media="all" />
+                     </noscript>
+                     <noscript>
+                        <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/template-collection.css?v=6595738038178392633" rel="stylesheet" type="text/css" media="all" />
+                     </noscript>
+                     <div class="collection page-width">
+                        <div class="title-wrapper-with-link">
+                           <h2 class="title">You may also like</h2>
+                        </div>
+                        <slider-component class="slider-mobile-gutter">
+                           <ul class="grid grid--2-col product-grid grid--2-col-tablet grid--4-col-desktop negative-margin--small" role="list">
+                              <t t-foreach="products" t-as="product">
+                                 <li class="grid__item">
+                                    <!-- <t t-set="product_href" t-value="/shop" /> t-att-href="/shop" -->
+                                    <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rating.css?v=2457308526394124043" rel="stylesheet" type="text/css" media="all" />
+                                    <div class="card-wrapper">
+                                       <a t-att-href="product.website_url" class="full-unstyled-link" style="text-decoration: none;">
+                                          <span class="visually-hidden"><t t-esc="product.name" /></span>
+                                           
+                                          <div class="card card--product card--outline" tabindex="-1">
+                                             <div class="card__inner">
+                                                <div>
+                                                   <div class="media media--transparent media--square media--hover-effect">
+                                                      <!--
+                                                         <img srcset="//cdn.shopify.com/s/files/1/0600/5473/2985/products/82_165x.png?v=1642158488 165w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/82_360x.png?v=1642158488 360w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/82_533x.png?v=1642158488 533w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/82_720x.png?v=1642158488 720w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/82_940x.png?v=1642158488 940w,//cdn.shopify.com/s/files/1/0600/5473/2985/products/82_1066x.png?v=1642158488 1066w" src="//cdn.shopify.com/s/files/1/0600/5473/2985/products/82_533x.png?v=1642158488" sizes="(min-width: 1600px) 367px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)" alt="My Dearest" loading="lazy" class="motion-reduce" width="2160" height="2160" />
+                                                      -->
+                                                      
+                                                         <img t-attf-src="/web/image/product.template/#{product.id}/image_1024" sizes="(min-width: 1600px) 367px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)" alt="My Dearest" loading="lazy" class="motion-reduce" width="2160" height="2160" />
 
-                     
+                                                      <!--
+                                                      <t t-set="image_holder" t-value="product._get_image_holder()"/>
+                                                      <span t-field="image_holder.image_1920"
+                                                         t-options="{'widget': 'image', 'preview_image': 'image_1024', 'itemprop': 'image'}"
+                                                         sizes="(min-width: 1600px) 367px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)" 
+                                                               t-att-alt="product.name" loading="lazy" class="motion-reduce" width="2880" height="2880" 
+                                                         />
+                                                         -->
+                                                   </div>
+                                                </div>
+                                                
+                                             </div>
+                                          </div>
+                                          <div class="card-information">
+                                             <div class="card-information__wrapper">
+                                                <span class="card-information__text h5"><t t-esc="product.name" /></span>
+                                                <span class="caption-large light" />
+                                                <div class="price  price--on-sale ">
+                                                   <dl>
+                                                      <!-- 
+                                                      <div class="price__regular">
+                                                            <dt>
+                                                               <span class="visually-hidden visually-hidden-/-inline">Regular price</span>
+                                                            </dt>
+                                                            <dd>
+                                                               <span class="price-item price-item-/-regular"><t t-esc="product.currency_id.symbol" /><t t-esc="product.list_price" /></span>
+                                                            </dd>
+                                                      </div>
+                                                      -->
+                                                      
+                                                      <div class="price__sale">
+                                                      <t t-if="product.regular_price">
+                                                         <dt class="price__compare">
+                                                            <span class="visually-hidden visually-hidden--inline">Regular price</span>
+                                                         </dt>
+                                                         <dd class="price__compare">
+                                                            <s class="price-item price-item--regular">
+                                                            
+                                                               <t t-esc="product.currency_id.symbol" />
+                                                               <t t-esc="product.regular_price" />
+                                                            </s>
+                                                         </dd>
+                                                      </t>
 
-                  </div>
-               </div>
-            </main>
+                                                         <dt>
+                                                            <span class="visually-hidden visually-hidden--inline">Sale price</span>
+                                                         </dt>
+                                                         <dd>
+                                                            <span class="price-item price-item--sale">
+                                                               <t t-if="product.product_variant_count &gt; 1">
+                                                                  From 
+                                                                  <t t-esc="product.currency_id.symbol" />
+                                                                  <t t-esc="product.list_price" />
+                                                               </t>
+                                                               <t t-else="">
+                                                                  <t t-esc="product.currency_id.symbol" />
+                                                                  <t t-esc="product.list_price" />
+                                                               </t>
+                                                            </span>
+                                                         </dd>
+                                                      </div>
+                                                      <small class="unit-price caption hidden">
+                                                         <dt class="visually-hidden">Unit price</dt>
+                                                         <dd>
+                                                            <span />
+                                                            <span aria-hidden="true">/</span>
+                                                            <span class="visually-hidden"> per </span>
+                                                            <span />
+                                                         </dd>
+                                                      </small>
+                                                   </dl>
+                                                </div>
+                                                
+                                             </div>
+                                          </div>
+                                       </a>
+                                    </div>
+                                 
+                                 </li>
+                                 
+                              </t>
+                          </ul>
+                      </slider-component>
+                    </div>
+                  </section>
+
+         </template>
+
+
+      <template id="4_random_products_show" inherit_id="website_sale.product" priority="100" active="True" customize_show="True" name="Products You May like">
+         <xpath expr="//div[@id='wrap']/section[1]" position="after">
+               <t t-call="theme_garden.4_random_products" />
          </xpath>
       </template>
-   </data>
+
+      <template id="featured_collection_show" inherit_id="website_sale.product" priority="200" active="True" customize_show="True" name="Show Featured Collection">
+         <xpath expr="//div[@id='wrap']/section[1]" position="after">
+               <t t-call="theme_garden.featured_collection" />
+         </xpath>
+      </template>
+
+      
 </odoo>
+
+
+
+
+
+
+
+
+
+
 
