@@ -4,7 +4,7 @@
     'version': '14.0.1.0.0',"author": "Codegrove, Rex",
     'license': "AGPL-3",
     'depends': [
-        #'webiste',
+        'website',
     ],
     'data': [
         'views/product_line.xml',
