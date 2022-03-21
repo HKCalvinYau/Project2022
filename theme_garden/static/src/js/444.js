@@ -79,7 +79,7 @@ publicWidget.registry.productsSearchBar = publicWidget.Widget.extend({
         this.$el.toggleClass('dropdown show', !!res);
         if (res) {
             var products = res['products'];
-            this.$menu = $(qweb.render('website_sale.productsSearchBar.autocomplete', {
+            this.$menu = $(qweb.render('product_line_control.productsSearchBar.autocomplete', {
                 products: products,
                 hasMoreProducts: products.length < res['products_count'],
                 currency: res['currency'],

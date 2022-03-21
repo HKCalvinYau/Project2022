@@ -19,6 +19,8 @@
     </template>
 
     <template id="products_item_custom" inherit_id="website_sale.products_item">
+
+
       <xpath expr="//form" position="replace">
 
          <link href="//cdn.shopify.com/s/files/1/0600/5473/2985/t/2/assets/component-rating.css?v=2457308526394124043" rel="stylesheet" type="text/css" media="all" />
@@ -103,6 +105,9 @@
 
     <xpath expr="//div[@id='products_grid_before']" position="attributes">
         <attribute name="class">col-lg-2</attribute>
+    </xpath>
+
+    <xpath expr="//div[hasclass('products_pager')]/t[2]" position="replace">
     </xpath>
 
                         
